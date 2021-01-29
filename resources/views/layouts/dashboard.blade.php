@@ -17,13 +17,11 @@
 
             <!-- Styles -->
         @yield('css.store')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
         <link href="{{asset('css/app.css')}}" rel="stylesheet" />
-        <link href="{{asset('css/mystyles.css')}}" rel="stylesheet" />
         @yield('css')
+        <link href="{{asset('css/mystyles.css')}}" rel="stylesheet" />
 
     </head>
     <body class="sb-nav-fixed">
@@ -62,7 +60,7 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Principal</div>
                             <a class="nav-link" href="{{route('dashboard.show')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Dashboard
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Módulos</div>
@@ -70,8 +68,8 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Órdenes
                             </a>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <a class="nav-link" href="{{route('dashboard.products')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cookie-bite"></i></div>
                                 Productos
                             </a>
                             <a class="nav-link" href="charts.html">
@@ -108,6 +106,7 @@
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">@yield('title-page')</h1>
+                        <h5 class="mt-4">@yield('subtitle-page')</h5>
 
                         @yield('content')
      
@@ -127,8 +126,5 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('js/scripts.js')}}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     </body>
 </html>
