@@ -21,11 +21,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('root');
 
 //Rutas Vistas Store
 Route::get('store', 'StoreController@index')->name('store.index');
 Route::get('store/{category}', 'StoreController@categories')->name('store.categories.show');
 Route::get('store/product/{product}', 'StoreController@show_product')->name('store.product.show');
+
+//vista dashboard
+Route::get('dashboard/index', 'DashboardController@index')->name('dashboard.show');
 
 //vista dashboard productos
 Route::get('dashboard/products', 'ProductController@index')->name('dashboard.products');

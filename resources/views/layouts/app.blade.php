@@ -47,7 +47,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/') }}">Home
+                            <a class="nav-link" href="{{ route('root') }}">Home
                             <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -81,14 +81,22 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    
+                                    <a class="dropdown-item" href="#">
+                                        Perfil
+                                    </a>
+                        
+                                    @if (optional(auth()->user())->isAdmin())
+                                    <a class="dropdown-item" href="{{ route('dashboard.show')}}">
+                                        Admin Panel
+                                    </a>
+                                    @endif
+
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="#">
-                                        Perfil
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -107,6 +115,13 @@
             @yield('content')
         </main>
     </div>
+
+    <footer class="mt-4 py-4 bg-white">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Luis Piñero 2021</p>
+        </div>
+    <!-- /.container -->
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
