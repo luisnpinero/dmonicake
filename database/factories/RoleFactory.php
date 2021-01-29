@@ -23,7 +23,7 @@ class RoleFactory extends Factory
     {
         return [
             'name' =>$this->faker->unique()->randomElement(['Admin','Customer']),
-            'status' =>$this->faker->randomElement(['Active','Inactive']),
+            //'status' =>$this->faker->randomElement(['Active','Inactive']),
             'modified_by' =>$this->faker->randomDigitNotNull,
         ];
     }

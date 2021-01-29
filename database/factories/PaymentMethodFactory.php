@@ -23,7 +23,7 @@ class PaymentMethodFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->randomElement(['Tarjeta de Débito', 'Tarjeta de Crédito','Transferencia Bancaria','Contra entrega','Paypal']),
-            'status'  => $this->faker->randomElement(['Active','Inactive']),
+            //'status'  => $this->faker->randomElement(['Active','Inactive']),
             'modified_by' => $this->faker->randomDigitNotNull,
         ];
     }

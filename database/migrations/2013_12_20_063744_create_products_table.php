@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('modified_by')->nullable()->default('1');
             $table->foreignId('cost_id')->constrained('costs');
             $table->foreignId('category_id')->constrained('categories');
-            $table->boolean('status')->default(true);
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
