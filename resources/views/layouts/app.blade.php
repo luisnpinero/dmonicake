@@ -28,6 +28,7 @@
 
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -116,7 +117,7 @@
         </main>
     </div>
 
-    <footer class="mt-4 py-4 bg-white">
+    <footer class="mt-6 py-4 bg-white">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Luis Piñero 2021</p>
         </div>

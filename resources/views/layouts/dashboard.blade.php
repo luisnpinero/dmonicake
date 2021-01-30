@@ -64,19 +64,19 @@
                                 Dashboard
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Módulos</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('dashboard.orders.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Órdenes
                             </a>
-                            <a class="nav-link" href="{{route('dashboard.products')}}">
+                            <a class="nav-link" href="{{route('dashboard.products.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cookie-bite"></i></div>
                                 Productos
                             </a>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('dashboard.users.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Usuarios
+                                Usuarios 
                             </a>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{route('dashboard.roles.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Roles
                             </a>
@@ -97,7 +97,10 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Usuario:</div>
-                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} 
+                        
+                        <div class="small">Rol:</div>
+                        {{ $roles->find(Auth::user()->role_id)->name}}
                     </div>
                 </nav>
             </div>

@@ -4,11 +4,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 @endsection
 
-@section('title','Productos')
+@section('title','Órdenes')
 
-@section('title-page','Productos')
+@section('title-page','Órdenes')
 
-@section('subtitle-page','Módulo de Gestión de Productos')
+@section('subtitle-page','Módulo de Gestión de Órdenes')
 
 @section('content')
 
@@ -16,51 +16,39 @@
 
 <div class="card-body">
 
-    <div class="d-flex flex-row-reverse pb-4">
-        <a href="{{route('dashboard.products.create')}}" class="btn btn-primary">Nuevo <i class="fas fa-plus"></i></a>
-    </div>
-
     <div class="table-responsive table-hover">
         <table class="table table-bordered table-striped" id="dataTable" width="99%" cellspacing="0">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
                     <th>Estado</th>
-                    <th>Modificado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
                     <th>Estado</th>
-                    <th>Modificado</th>
                     <th>Acciones</th>
                 </tr>
             </tfoot>
             <tbody>
-                @foreach ($products as $product)
+                @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $categories->find($product->category_id)->name }}</td>
-                        <td>{{ $product->stock }}</td>
-                        <td>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name}} {{ $costs->find($product->cost_id)->cost}}</td>
-                        <td>{{ $product->status}}</td>
-                        <td>{{ $product->updated_at}}</td>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $users->find($order->user_id)->first_name }} {{ $users->find($order->user_id)->last_name }}</td>
+                        <td>{{ $currencies->find(1)->name }} {{$order->total}}</td>
+                        <td>{{ $order->created_at }}</td>
+                        <td>{{ $order->status}}</td>
                         <td><div class="d-flex justify-content-around">
                             <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
-                            <a href="#" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
-
-                            @if( $product->status == 'active' ) 
+                            @if( $order->status == 'active' ) 
                                 <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
                             @else
                                 <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>

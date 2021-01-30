@@ -5,19 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Cost;
 use App\Models\Currency;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class OrderController extends Controller
 {
     public function index(){
-        return view('panel.products.index')->with([
-            'products' => Product::all(),
-            'categories' => Category::all(),
+        return view('panel.orders.index')->with([
+            'orders' => Order::all(),
             'currencies' => Currency::all(),
-            'costs' => Cost::all(),
             'roles' => Role::all(),
+            'users' => User::all(),
             ]);
     }
 
@@ -27,6 +28,7 @@ class ProductController extends Controller
             'roles' => Role::all(),
             'categories' => Category::all()->sortBy('name'),
             'currencies' => Currency::all()->sortBy('name'),
+
         ]);
     }
 
@@ -70,5 +72,5 @@ class ProductController extends Controller
 
     public function destroy($user){
         //
-    }
+    }    
 }

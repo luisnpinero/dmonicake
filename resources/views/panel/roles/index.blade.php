@@ -4,11 +4,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 @endsection
 
-@section('title','Productos')
+@section('title','Roles')
 
-@section('title-page','Productos')
+@section('title-page','Roles')
 
-@section('subtitle-page','Módulo de Gestión de Productos')
+@section('subtitle-page','Módulo de Gestión de Roles')
 
 @section('content')
 
@@ -17,7 +17,7 @@
 <div class="card-body">
 
     <div class="d-flex flex-row-reverse pb-4">
-        <a href="{{route('dashboard.products.create')}}" class="btn btn-primary">Nuevo <i class="fas fa-plus"></i></a>
+        <a href="{{route('dashboard.roles.create')}}" class="btn btn-primary">Nuevo <i class="fas fa-plus"></i></a>
     </div>
 
     <div class="table-responsive table-hover">
@@ -26,11 +26,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
                     <th>Estado</th>
-                    <th>Modificado</th>
+                    <th>Creado</th>
+                    <th>Actualizado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -38,29 +36,25 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
                     <th>Estado</th>
-                    <th>Modificado</th>
+                    <th>Creado</th>
+                    <th>Actualizado</th>
                     <th>Acciones</th>
                 </tr>
             </tfoot>
             <tbody>
-                @foreach ($products as $product)
+                @foreach ($roles as $role)
                     <tr>
-                        <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $categories->find($product->category_id)->name }}</td>
-                        <td>{{ $product->stock }}</td>
-                        <td>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name}} {{ $costs->find($product->cost_id)->cost}}</td>
-                        <td>{{ $product->status}}</td>
-                        <td>{{ $product->updated_at}}</td>
+                        <td>{{ $role->id }}</td>
+                        <td>{{ $role->name }}</td>
+                        <td>{{ $role->status}}</td>
+                        <td>{{ $role->created_at}}</td>
+                        <td>{{ $role->updated_at}}</td>
                         <td><div class="d-flex justify-content-around">
                             <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
                             <a href="#" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
 
-                            @if( $product->status == 'active' ) 
+                            @if( $role->status == 'active' ) 
                                 <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
                             @else
                                 <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>
