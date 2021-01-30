@@ -42,9 +42,17 @@
     font-weight: 400;
     color: #7d2181;
     text-decoration: none;
-  }
+}
 
-  .sb-sidenav-light {
+.sb-sidenav-light {
     background-color: #e9ecef;
     color: #212529;
-  }
+}
+
+.fas-icon-purple{
+    color:#f24d9a;
+}
+
+.fas-icon-purple:hover, .fas-icon-purple:active, .fas-icon-purple:focus{
+    color:#7d2181;
+}

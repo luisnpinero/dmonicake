@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('css')
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 @endsection
 
 @section('title','Productos')
@@ -13,10 +13,6 @@
 @section('content')
 
 <div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1"></i>
-        DataTable Example
-    </div>
 
 <div class="card-body">
 
@@ -24,12 +20,13 @@
         <a href="#" class="btn btn-primary">Nuevo <i class="fas fa-plus"></i></a>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <div class="table-responsive table-hover">
+        <table class="table table-bordered table-striped" id="dataTable" width="99%" cellspacing="0">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Categoría</th>
                     <th>Stock</th>
                     <th>Precio</th>
                     <th>Estado</th>
@@ -41,6 +38,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Categoría</th>
                     <th>Stock</th>
                     <th>Precio</th>
                     <th>Estado</th>
@@ -53,11 +51,23 @@
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
+                        <td>{{ $categories->find($product->category_id)->name }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->id}}</td>
                         <td>{{ $product->status}}</td>
                         <td>{{ $product->updated_at}}</td>
-                        <td>Si no no sabe</td>
+                        <td><div class="d-flex justify-content-around">
+                            <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
+                            <a href="#" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+
+                            @if( $product->status == 'active' ) 
+                                <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
+                            @else
+                                <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>
+                            @endif
+                            <a href="#" title="Eliminar"><i class="fas fa-trash-alt fas-icon-purple"></i></a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach                    
             </tbody>
@@ -69,7 +79,12 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="{{asset('js/datatables-demo.js')}}"></script>
+  
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>  
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>  
+    <script>
+        $(document).ready( function () {
+            $('#dataTable').DataTable();
+        });
+    </script>  
 @endsection
