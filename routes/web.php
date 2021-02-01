@@ -36,26 +36,26 @@ Route::get('dashboard/products', 'ProductController@index')->name('dashboard.pro
 Route::get('dashboard/products/create', 'ProductController@create')->name('dashboard.products.create');
 Route::get('dashboard/products/{product}', 'ProductController@show')->name('dashboard.products.show');
 Route::get('dashboard/products/{products}/edit', 'ProductController@edit')->name('dashboard.products.edit');
-Route::post('dashboard/products', 'ProductController@store')->name('dashboard.products.store');
+Route::post('dashboard/products/create', 'ProductController@store')->name('dashboard.products.store');
 Route::put('dashboard/products/{products}', 'ProductController@update')->name('dashboard.products.update');
 Route::put('dashboard/products/{products}/status', 'ProductController@status_update')->name('dashboard.products.update.status');
 Route::put('dashboard/products/{products}/delete', 'ProductController@soft_delete')->name('dashboard.products.delete');
 
 //vista dashboard ordenes
 Route::get('dashboard/orders', 'OrderController@index')->name('dashboard.orders.index');
-Route::get('dashboard/orders/{Orders}', 'OrderController@show')->name('dashboard.Orders.show');
-Route::post('dashboard/orders', 'OrderController@store')->name('dashboard.Orders.store');
-Route::match(['put', 'patch'], 'OrderController@update')->name('dashboard.Orders.update');
-Route::delete('dashboard/orders/{Orders}', 'OrderController@destroy')->name('dashboard.Orders.delete');
+Route::get('dashboard/orders/{Orders}', 'OrderController@show')->name('dashboard.orders.show');
+Route::put('dashboard/orders/{orders}/status', 'OrderController@status_update')->name('dashboard.orders.update.status');
+Route::put('dashboard/orders/{order}/delete', 'OrderController@soft_delete')->name('dashboard.orders.delete');
 
 //vista dashboard usuarios
 Route::get('dashboard/users', 'UserController@index')->name('dashboard.users.index');
 Route::get('dashboard/users/create', 'UserController@create')->name('dashboard.users.create');
 Route::get('dashboard/users/{user}', 'UserController@show')->name('dashboard.users.show');
 Route::get('dashboard/users/{user}/edit', 'UserController@edit')->name('dashboard.users.edit');
-Route::post('dashboard/users', 'UserController@store')->name('dashboard.users.store');
-Route::match(['put', 'patch'], 'UserController@update')->name('dashboard.users.update');
-Route::delete('dashboard/users/{user}', 'UserController@destroy')->name('dashboard.users.delete');
+Route::post('dashboard/users/create', 'UserController@store')->name('dashboard.users.store');
+Route::put('dashboard/users/{users}', 'UserController@update')->name('dashboard.users.update');
+Route::put('dashboard/users/{users}/status', 'UserController@status_update')->name('dashboard.users.update.status');
+Route::put('dashboard/users/{users}/delete', 'UserController@soft_delete')->name('dashboard.users.delete');
 
 //vista dashboard roles
 Route::get('dashboard/roles', 'RoleController@index')->name('dashboard.roles.index');

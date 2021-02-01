@@ -70,11 +70,11 @@
                                 @method('put')
 
                                 @if( $product->status == 'active' )
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="inactive">
+                                    <button class="btn btn-sm px-0 mx-0" name="status" title="Deshabilitar" value="inactive">
                                         <i class="fas fa-toggle-on text-success"></i>
                                     </button>
                                 @else
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active">
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active" title="Habilitar">
                                         <i class="fas fa-toggle-off text-danger"></i>
                                     </button> 
                                 @endif
@@ -83,7 +83,7 @@
                             <form action="{{ route('dashboard.products.delete',$product)}}" method="post">
                                 @csrf
                                 @method('put')
-                                <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" value=1>
+                                <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" title="Borrar" value=1>
                                     <i class="fas fa-trash-alt text-danger"></i>
                                 </button>                             
                             </form>

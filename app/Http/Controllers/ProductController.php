@@ -8,13 +8,15 @@ use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class ProductController extends Controller
 {
     public function index(){
+        $products = Product::all();
+        $products_nodelete = $products->where('is_deleted',false);
+        
         return view('panel.products.index')->with([
-            'products' => Product::all(),
+            'products' => $products_nodelete,
             'categories' => Category::all(),
             'currencies' => Currency::all(),
             'costs' => Cost::all(),
@@ -129,9 +131,5 @@ class ProductController extends Controller
         return redirect()
              ->route('dashboard.products.index')
              ->withSuccess("El producto {$product->name} fue eliminado con éxito");
-
-
-
-
     }
 }

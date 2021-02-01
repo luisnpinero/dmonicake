@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('address_id')->constrained('addresses');
             $table->foreignId('role_id')->constrained('roles');
             $table->integer('modified_by')->nullable()->default('1');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

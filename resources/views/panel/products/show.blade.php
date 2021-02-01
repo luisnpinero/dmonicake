@@ -64,6 +64,16 @@
                                 <th class="pl-0 w-25"><strong>Estado</strong></th>
                                 <td>{{ $product->status }} </td>
                             </tr>
+                            
+                            <tr>
+                                <th class="pl-0 w-25"><strong>Creado</strong></th>
+                                <td>{{ $product->created_at }} </td>
+                            </tr>
+                            
+                            <tr>
+                                <th class="pl-0 w-25"><strong>Actualizado</strong></th>
+                                <td>{{ $product->updated_at }} </td>
+                            </tr>
 
                         </tbody>
                     </table>

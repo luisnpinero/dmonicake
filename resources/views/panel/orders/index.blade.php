@@ -47,13 +47,33 @@
                         <td>{{ $order->created_at }}</td>
                         <td>{{ $order->status}}</td>
                         <td><div class="d-flex justify-content-around">
-                            <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
-                            @if( $order->status == 'active' ) 
-                                <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
-                            @else
-                                <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>
-                            @endif
-                            <a href="#" title="Eliminar"><i class="fas fa-trash-alt fas-icon-purple"></i></a>
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{ route('dashboard.orders.show', $order->id) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a> 
+                            </button>
+
+                            <form action="{{ route('dashboard.orders.update.status', $order) }}" method="post">
+                                @csrf
+                                @method('put')
+
+                                @if( $order->status == 'active' )
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="inactive">
+                                        <i class="fas fa-toggle-on text-success"></i>
+                                    </button>
+                                @else
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active">
+                                        <i class="fas fa-toggle-off text-danger"></i>
+                                    </button> 
+                                @endif
+                            </form>
+
+                            <form action="{{ route('dashboard.orders.delete',$order)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" value=1>
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </button>                             
+                            </form>
+
                             </div>
                         </td>
                     </tr>

@@ -23,44 +23,34 @@ class OrderController extends Controller
     }
 
     public function create(){
-
-        return view('panel.products.create')->with([
-            'roles' => Role::all(),
-            'categories' => Category::all()->sortBy('name'),
-            'currencies' => Currency::all()->sortBy('name'),
-
-        ]);
+        //
     }
 
     public function store(){
-        // ????
-        $cost = Cost::create([
-            'cost' => request()->cost_id,
-            'currency_id' => request()->currency_id,
-        ]);
-        // $product = Product::create([
-        //     'name' =>,
-        //     'description' =>,
-        //     'stock' =>,
-        //     'cost_id' =>,
-        //     'category_id' =>,
-        //     'status' =>,
-        // ]);
-        $product = Product::create(request()->all());
-        return redirect()
-            ->route('panel.products.index')
-            ->withSuccess("El nuevo producto con id {$product->id} fue creado con éxito");
+        //
     }
 
-    public function show_product(){
-        return "ok";
+    public function show($order){
+
+        $order = Order::find($order);
+        
+        return view('panel.orders.show')->with([
+            'order' => $order,
+            'roles' => Role::all(),
+            'products' => Product::all(),
+            'categories' => Category::all(),
+            'currencies' => Currency::all(),
+            'costs' => Cost::all(),
+
+            'user' => $user = User::find($order->user_id),
+        ]);
     }
 
     public function categories(){
-        return "ok";
+        //
     }
 
-    public function edit($user){
+    public function edit($order){
         return "vista dashboard user edit {$user}";
         // return view('index');
     }
@@ -70,7 +60,25 @@ class OrderController extends Controller
         // return view('index')
     }
 
-    public function destroy($user){
-        //
-    }    
+        
+    public function status_update(Request $request, $order){
+
+        $order = Order::find($order);
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()
+             ->route('dashboard.orders.index')
+             ->withSuccess("La orden {$order->id} fue actualizada con éxito");
+    }
+
+    public function soft_delete(Request $request, $order){
+        $order = Order::find($order);
+        $order->is_deleted = $request->is_deleted;
+        $order->save();
+
+        return redirect()
+             ->route('dashboard.orders.index')
+             ->withSuccess("La order {$order->id} fue eliminada con éxito");
+    }
 }
