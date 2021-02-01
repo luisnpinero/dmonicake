@@ -111,10 +111,28 @@
                         <h1 class="mt-4">@yield('title-page')</h1>
                         <h5 class="mt-4">@yield('subtitle-page')</h5>
 
+                        <div class="container-fluid">
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
+                
+                            @if (isset($errors) && $errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                         @yield('content')
      
                     </div>
                 </main>
+
 
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">

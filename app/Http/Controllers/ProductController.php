@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('dashboard.products.index')
-            ->withSuccess("El nuevo producto con id {$product->id} fue creado con éxito");
+            ->withSuccess("El producto {$product->name} con id {$product->id} fue creado con éxito");
     }
 
     public function show($product){
@@ -104,7 +105,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('dashboard.products.index')
-            ->withSuccess("El nuevo producto con id {$product->id} fue actualizado con éxito");
+            ->withSuccess("El producto {$product->name} fue actualizado con éxito");
     }
     
     public function status_update(Request $request, $product){
@@ -116,7 +117,7 @@ class ProductController extends Controller
 
         return redirect()
              ->route('dashboard.products.index')
-             ->withSuccess("El nuevo producto con id {$product->id} fue actualizado con éxito");
+             ->withSuccess("El producto {$product->nombre} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $product){
@@ -125,11 +126,9 @@ class ProductController extends Controller
         $product->is_deleted = $request->is_deleted;
         $product->save();
 
-        flash('Welcome Aboard!');
-
         return redirect()
              ->route('dashboard.products.index')
-             ->withSuccess("El nuevo producto con id {$product->id} fue eliminado con éxito");
+             ->withSuccess("El producto {$product->name} fue eliminado con éxito");
 
 
 

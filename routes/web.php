@@ -38,7 +38,7 @@ Route::get('dashboard/products/{product}', 'ProductController@show')->name('dash
 Route::get('dashboard/products/{products}/edit', 'ProductController@edit')->name('dashboard.products.edit');
 Route::post('dashboard/products', 'ProductController@store')->name('dashboard.products.store');
 Route::put('dashboard/products/{products}', 'ProductController@update')->name('dashboard.products.update');
-Route::put('dashboard/products/{products}', 'ProductController@status_update')->name('dashboard.products.update.status');
+Route::put('dashboard/products/{products}/status', 'ProductController@status_update')->name('dashboard.products.update.status');
 Route::put('dashboard/products/{products}/delete', 'ProductController@soft_delete')->name('dashboard.products.delete');
 
 //vista dashboard ordenes
