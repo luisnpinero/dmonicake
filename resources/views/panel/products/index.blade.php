@@ -58,7 +58,7 @@
                         <td>{{ $product->updated_at}}</td>
                         <td><div class="d-flex justify-content-around">
                             <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
-                            <a href="#" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            <a href="{{route('dashboard.products.edit',$product->name)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
 
                             @if( $product->status == 'active' ) 
                                 <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>

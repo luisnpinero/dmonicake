@@ -30,23 +30,24 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(){
-        // ????
-        $cost = Cost::create([
-            'cost' => request()->cost_id,
-            'currency_id' => request()->currency_id,
-        ]);
-        // $product = Product::create([
-        //     'name' =>,
-        //     'description' =>,
-        //     'stock' =>,
-        //     'cost_id' =>,
-        //     'category_id' =>,
-        //     'status' =>,
-        // ]);
-        $product = Product::create(request()->all());
+    public function store(Request $request){
+
+        $cost = new Cost();
+        $cost->cost = $request->cost;
+        $cost->currency_id = $request->currency_id;
+        $cost->save();
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->stock = $request->stock;
+        $product->status = $request->status;
+        $product->cost_id = $cost->id;
+        $product->category_id = $request->category_id;
+        $product->save();
+
         return redirect()
-            ->route('panel.products.index')
+            ->route('dashboard.products.index')
             ->withSuccess("El nuevo producto con id {$product->id} fue creado con éxito");
     }
 
@@ -58,14 +59,46 @@ class ProductController extends Controller
         return "ok";
     }
 
-    public function edit($user){
-        return "vista dashboard user edit {$user}";
-        // return view('index');
+    public function edit($product){
+
+        $product = Product::where('name',$product)->first();
+
+        return view('panel.products.edit')->with([
+            'product' => $product,
+            'categories' => Category::all(),
+            'currencies' => Currency::all(),
+            'costs' => Cost::all(),
+            'roles' => Role::all(),
+        ]);
     }
 
 
-    public function update($user){
-        // return view('index')
+    public function update(Request $request, $product){
+        $product_id = intval($product);
+
+        
+
+        $product = Product::find($product_id);
+        
+        
+        // $cost = Cost::find($products->cost_id)->first();
+        // dd($request);
+        $cost = new Cost();
+        $cost->cost = $request->cost;
+        $cost->currency_id = $request->currency_id;
+        $cost->save();
+        
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->stock = $request->stock;
+        $product->status = $request->status;
+        $product->cost_id = $cost->id;
+        $product->category_id = $request->category_id;
+        $product->save();
+
+        return redirect()
+            ->route('dashboard.products.index')
+            ->withSuccess("El nuevo producto con id {$product->id} fue actualizado con éxito");
     }
 
     public function destroy($user){

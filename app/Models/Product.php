@@ -16,6 +16,11 @@ class Product extends Model
 
     protected $table = 'products';
 
+    protected static function booted()
+    {
+        //
+    }
+
     protected $with = [
         'images',
     ];
@@ -39,7 +44,7 @@ class Product extends Model
     }
 
     public function orders(){
-        return $this->morphedByMany(Order::class)->withPivot('quantity');
+        return $this->morphedByMany(Order::class, 'productable')->withPivot('quantity');
     }
 
     public function carts(){

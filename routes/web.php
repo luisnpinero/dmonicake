@@ -37,7 +37,7 @@ Route::get('dashboard/products/create', 'ProductController@create')->name('dashb
 Route::get('dashboard/products/{products}', 'ProductController@show')->name('dashboard.products.show');
 Route::get('dashboard/products/{products}/edit', 'ProductController@edit')->name('dashboard.products.edit');
 Route::post('dashboard/products', 'ProductController@store')->name('dashboard.products.store');
-Route::match(['put', 'patch'], 'ProductController@update')->name('dashboard.products.update');
+Route::put('dashboard/products/{products}', 'ProductController@update')->name('dashboard.products.update');
 Route::delete('dashboard/products/{products}', 'ProductController@destroy')->name('dashboard.products.delete');
 
 //vista dashboard ordenes

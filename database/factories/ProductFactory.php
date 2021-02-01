@@ -22,7 +22,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->words($nb = mt_rand(1,3), $asText = true),
+            'name' => $this->faker->unique()->words($nb = mt_rand(1,3), $asText = true),
             'description' => $this->faker->sentence(mt_rand(15, 25)),
             'stock' => $this->faker->randomDigit,
             'updated_at' => now(),
