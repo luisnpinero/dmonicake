@@ -56,3 +56,7 @@
 .fas-icon-purple:hover, .fas-icon-purple:active, .fas-icon-purple:focus{
     color:#7d2181;
 }
+
+.fa-input { 
+    font-family: FontAwesome, ‘Helvetica Neue’, Helvetica, Arial, sans-serif;
+}

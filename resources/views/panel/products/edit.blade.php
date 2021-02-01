@@ -12,6 +12,7 @@ Editar Producto: <b>{{ $product->name }}</b>
 
 <div class="container card">
     <div class="card-body">
+        
         <form action="{{ route('dashboard.products.update', $product) }}" method="post">
             @csrf
             @method('put')

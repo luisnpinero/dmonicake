@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('cost_id')->constrained('costs');
             $table->foreignId('category_id')->constrained('categories');
             $table->string('status')->default('active');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

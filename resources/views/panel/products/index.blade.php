@@ -57,15 +57,37 @@
                         <td>{{ $product->status}}</td>
                         <td>{{ $product->updated_at}}</td>
                         <td><div class="d-flex justify-content-around">
-                            <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
-                            <a href="{{route('dashboard.products.edit',$product->name)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{ route('dashboard.products.show', $product->name) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a> 
+                            </button>                         
+                            
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{route('dashboard.products.edit',$product->name)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            </button>
 
-                            @if( $product->status == 'active' ) 
-                                <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
-                            @else
-                                <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>
-                            @endif
-                            <a href="#" title="Eliminar"><i class="fas fa-trash-alt fas-icon-purple"></i></a>
+                            <form action="{{ route('dashboard.products.update.status', $product) }}" method="post">
+                                @csrf
+                                @method('put')
+
+                                @if( $product->status == 'active' )
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="inactive">
+                                        <i class="fas fa-toggle-on text-success"></i>
+                                    </button>
+                                @else
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active">
+                                        <i class="fas fa-toggle-off text-danger"></i>
+                                    </button> 
+                                @endif
+                            </form>
+
+                            <form action="{{ route('dashboard.products.delete',$product)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" value=1>
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </button>                             
+                            </form>
+
                             </div>
                         </td>
                     </tr>

@@ -51,8 +51,20 @@ class ProductController extends Controller
             ->withSuccess("El nuevo producto con id {$product->id} fue creado con éxito");
     }
 
-    public function show_product(){
-        return "ok";
+    public function show($product){
+
+        $product = Product::where('name',$product)->first();
+        $category = Category::find($product->category_id);
+        $cost = Cost::find($product->cost_id);
+        $currency = Currency::find($cost->currency_id);
+        
+        return view('panel.products.show')->with([
+            'product' => $product,
+            'roles' => Role::all(),
+            'category' => $category,
+            'currency' => $currency,
+            'cost' => $cost,
+        ]);
     }
 
     public function categories(){
@@ -75,14 +87,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $product){
         $product_id = intval($product);
-
-        
-
         $product = Product::find($product_id);
-        
-        
-        // $cost = Cost::find($products->cost_id)->first();
-        // dd($request);
+
         $cost = new Cost();
         $cost->cost = $request->cost;
         $cost->currency_id = $request->currency_id;
@@ -100,8 +106,33 @@ class ProductController extends Controller
             ->route('dashboard.products.index')
             ->withSuccess("El nuevo producto con id {$product->id} fue actualizado con éxito");
     }
+    
+    public function status_update(Request $request, $product){
+              
+        $product_id = intval($product);
+        $product = Product::find($product_id);
+        $product->status = $request->status;
+        $product->save();
 
-    public function destroy($user){
-        //
+        return redirect()
+             ->route('dashboard.products.index')
+             ->withSuccess("El nuevo producto con id {$product->id} fue actualizado con éxito");
+    }
+
+    public function soft_delete(Request $request, $product){
+        $product_id = intval($product);
+        $product = Product::find($product_id);
+        $product->is_deleted = $request->is_deleted;
+        $product->save();
+
+        flash('Welcome Aboard!');
+
+        return redirect()
+             ->route('dashboard.products.index')
+             ->withSuccess("El nuevo producto con id {$product->id} fue eliminado con éxito");
+
+
+
+
     }
 }
