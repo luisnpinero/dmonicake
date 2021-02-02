@@ -86,7 +86,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                     <input type="submit" class="btn btn-success btn-lg" value="Editar">
                 </div>
                 <div class="col-md-2">
-                    <a href="{{route('dashboard.products.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
+                    <a href="{{route('dashboard.users.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
             </div>           
         </form>

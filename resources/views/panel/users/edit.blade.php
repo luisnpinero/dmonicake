@@ -1,81 +1,118 @@
 @extends('layouts.dashboard')
 
-@section('title','Editar Productos')
+@section('title','Usuarios')
 
-@section('title-page','Productos')
+@section('title-page','Usuarios')
 
-@section('subtitle-page')
-Editar Producto: <b>{{ $product->name }}</b>
-@endsection
+@section('subtitle-page','Crear nuevo usuario')
 
 @section('content')
 
 <div class="container card">
     <div class="card-body">
-        
-        <form action="{{ route('dashboard.products.update', $product) }}" method="post">
+        <form action="{{route('dashboard.users.update', $user)}}" method="post">
             @csrf
             @method('put')
 
             <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Nombre del Producto</label>
+                <label for="first_name" class="col-md-4 col-form-label text-md-right">Nombres</label>
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $product->name }}" required autofocus placeholder="Ingresa el Nombre">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="description" class="col-md-4 col-form-label text-md-right">Descripción del Producto</label>
-                <div class="col-md-6">
-                    <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="" required autofocus placeholder="Ingresa la Descripción" rows="3">{{ old('description') ?? $product->description }}</textarea>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="stock" class="col-md-4 col-form-label text-md-right">Stock del Producto</label>
-                <div class="col-md-6">
-                    <input id="stock" type="number" min="0" step="1" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') ?? $product->stock }}" required autofocus placeholder="Ingresa el Stock">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="currency_id" class="col-md-4 col-form-label text-md-right">Moneda</label>
-                <div class="col-md-6">
-                    <select name="currency_id" class="custom-select" id="currency_id" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
-                        @foreach ($currencies as $currency)
-                            <option {{ $currency->id == $costs->find($product->cost_id)->currency_id ? 'selected' : ''}} value="{{$currency->id}}">{{$currency->name}}</option>
-                        @endforeach
-                    </select>  
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="cost" class="col-md-4 col-form-label text-md-right">Precio del Producto</label>
-                <div class="col-md-6">
-                    <input id="cost" type="number" min="0" step="0.01" class="form-control @error('cost') is-invalid @enderror" name="cost" value="{{ $costs->find($product->cost_id)->cost }}" required autofocus placeholder="Ingresa el Precio">
+                    <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') ?? $user->first_name }}" required autofocus placeholder="Ingresa los Nombres del usuario">
                 </div>
             </div>
             
             <div class="form-group row">
-                <label for="category_id" class="col-md-4 col-form-label text-md-right">Categoría del Producto</label>
+                <label for="last_name" class="col-md-4 col-form-label text-md-right">Apellidos</label>
                 <div class="col-md-6">
-                    <select name="category_id" class="custom-select" id="category_id" required autofocus>
+                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') ?? $user->last_name }}" required autofocus placeholder="Ingresa los Apellidos del usuario">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="phone_number" class="col-md-4 col-form-label text-md-right">Número de Teléfono</label>
+                <div class="col-md-6">
+                    <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') ?? $user->phone_number }}" required autofocus placeholder="Ingresa el Número Telefónico del usuario">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? $user->email }}" autofocus required placeholder="Ingresa el Email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="address" class="col-md-4 col-form-label text-md-right">Dirección</label>
+                <div class="col-md-6">
+                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') ?? $address->address }}" required autofocus placeholder="Ingresa la dirección del usuario">
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <label for="city" class="col-md-4 col-form-label text-md-right">Ciudad</label>
+                <div class="col-md-6">
+                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') ?? $address->city }}" required autofocus placeholder="Ingresa la ciudad">
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <label for="province" class="col-md-4 col-form-label text-md-right">Estado o Provincia</label>
+                <div class="col-md-6">
+                    <input id="province" type="text" class="form-control @error('province') is-invalid @enderror" name="province" value="{{ old('province') ?? $address->province }}" required autofocus placeholder="Ingresa el Estado o Provincia">
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <label for="country" class="col-md-4 col-form-label text-md-right">País</label>
+                <div class="col-md-6">
+                    <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') ?? $address->country }}" required autofocus placeholder="Ingresa el País">
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <label for="postal_code" class="col-md-4 col-form-label text-md-right">Código Postal</label>
+                <div class="col-md-6">
+                    <input id="postal_code" type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') ?? $address->postal_code }}" readdress autofocus placeholder="Ingresa el Código Postal">
+                </div>    
+            </div>    
+
+            <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Ingresa la contraseña">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="role_id" class="col-md-4 col-form-label text-md-right">Rol</label>
+                <div class="col-md-6">
+                    <select name="role_id" class="custom-select" id="role_id" required autofocus>
                         <option value="" selected>Escoge una opción</option>
-                        @foreach ($categories as $category)
-                            <option {{ $product->category_id == $category->id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
+                        @foreach ($roles as $role)
+                            <option {{ $role->id == $user->role_id ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
                     </select>  
                 </div>              
             </div>
             
             <div class="form-group row">
-                <label for="status" class="col-md-4 col-form-label text-md-right">Estado del Producto</label>
+                <label for="status" class="col-md-4 col-form-label text-md-right">Estado del Usuario</label>
                 <div class="col-md-6">
                     <select name="status" class="custom-select" id="status" required autofocus>
                         <option value="" selected>Escoge una opción</option>
-                        <option {{ $product->status == 'active' ? 'selected' : ''}} value="active">Disponible</option>
-                        <option {{ $product->status == 'inactive' ? 'selected' : ''}} value="inactive">No disponible</option>
+                        <option {{ $user->status == 'active' ? 'selected' : ''}} value="active">Activo</option>
+                        <option {{ $user->status == 'inactive' ? 'selected' : ''}} value="inactive">No Activo</option>
                     </select>  
                 </div>              
             </div>    
@@ -86,7 +123,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                     <input type="submit" class="btn btn-success btn-lg" value="Editar">
                 </div>
                 <div class="col-md-2">
-                    <a href="{{route('dashboard.products.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
+                    <a href="{{route('dashboard.users.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
             </div>           
         </form>

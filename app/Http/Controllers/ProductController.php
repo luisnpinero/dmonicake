@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::all();
-        $products_nodelete = $products->where('is_deleted',false);
+        
+        $products = Product::where('is_deleted',false)->get();
         
         return view('panel.products.index')->with([
-            'products' => $products_nodelete,
+            'products' => $products,
             'categories' => Category::all(),
             'currencies' => Currency::all(),
             'costs' => Cost::all(),

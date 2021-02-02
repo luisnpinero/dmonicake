@@ -29,8 +29,8 @@
                     <th>Apelidos</th>
                     <th>Telefono</th>
                     <th>Email</th>
-                    <th>Estado</th>
                     <th>Rol</th>
+                    <th>Estado</th>
                     <th>Fecha Registro</th>
                     <th>Acciones</th>
                 </tr>
@@ -43,8 +43,8 @@
                     <th>Telefono</th>
                     <th>Email</th>
                     <th>Rol</th>
-                    <th>Fecha Registro</th>
                     <th>Estado</th>
+                    <th>Fecha Registro</th>
                     <th>Acciones</th>
                 </tr>
             </tfoot>
@@ -57,39 +57,38 @@
                         <td>{{ $user->phone_number }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $roles->find($user->role_id)->name }}</td>
-                        <td>{{ $user->created_at }}</td>
                         <td>{{ $user->status}}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td><div class="d-flex justify-content-around">
                             <button class="btn btn-sm px-0 mx-0">
                                 <a href="{{ route('dashboard.users.show', $user->id) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a> 
                             </button>                         
                             
-                            {{-- <button class="btn btn-sm px-0 mx-0">
-                                <a href="{{route('dashboard.users.edit',$user->name)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{route('dashboard.users.edit',$user)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
                             </button>
 
                             <form action="{{ route('dashboard.users.update.status', $user) }}" method="post">
                                 @csrf
                                 @method('put')
-
+                                
                                 @if( $user->status == 'active' )
-                                    <button class="btn btn-sm px-0 mx-0" name="status" title="Deshabilitar" value="inactive">
-                                        <i class="fas fa-toggle-on text-success"></i>
-                                    </button>
+                                <button class="btn btn-sm px-0 mx-0" name="status" title="Deshabilitar" value="inactive">
+                                    <i class="fas fa-toggle-on text-success"></i>
+                                </button>
                                 @else
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active" title="Habilitar">
-                                        <i class="fas fa-toggle-off text-danger"></i>
-                                    </button> 
+                                <button class="btn btn-sm px-0 mx-0" name="status" value="active" title="Habilitar">
+                                    <i class="fas fa-toggle-off text-danger"></i>
+                                </button> 
                                 @endif
                             </form>
-
-                            <form action="{{ route('dashboard.products.delete',$product)}}" method="post">
+                            <form action="{{ route('dashboard.users.delete',$user)}}" method="post">
                                 @csrf
                                 @method('put')
                                 <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" title="Borrar" value=1>
                                     <i class="fas fa-trash-alt text-danger"></i>
                                 </button>                             
-                            </form> --}}
+                            </form>
 
                             </div>
                         </td>
