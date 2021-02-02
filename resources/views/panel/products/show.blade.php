@@ -25,13 +25,13 @@
         
         {{-- fotos del producto --}}
         <div class="row">
-            <div class="col-md-6 mb-4 mb-md-0">        
+            <div class="col-md-4 mb-4 mb-md-0">        
                 <div class="mdb-lightbox">
                     <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
                 </div>  
             </div>
                 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="table-responsive">
                     <table class="table table-sm table-borderless mb-0">
                         <tbody>

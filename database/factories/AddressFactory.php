@@ -26,6 +26,7 @@ class AddressFactory extends Factory
             'city'=> $this->faker->city,
             'province'=> $this->faker->state,
             'country'=> $this->faker->randomElement(['Venezuela']),
+            'postal_code'=> $this->faker->postcode,
         ];
     }
 }
