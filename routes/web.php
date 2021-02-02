@@ -66,3 +66,33 @@ Route::post('dashboard/roles/create', 'RoleController@store')->name('dashboard.r
 Route::put('dashboard/roles/{role}', 'RoleController@update')->name('dashboard.roles.update');
 Route::put('dashboard/roles/{role}/status', 'RoleController@status_update')->name('dashboard.roles.update.status');
 Route::put('dashboard/roles/{role}/delete', 'RoleController@soft_delete')->name('dashboard.roles.delete');
+
+//vista dashboard currencies 
+Route::get('dashboard/currencies', 'CurrencyController@index')->name('dashboard.currencies.index');
+Route::get('dashboard/currencies/create', 'CurrencyController@create')->name('dashboard.currencies.create');
+Route::get('dashboard/currencies/{currency}', 'CurrencyController@show')->name('dashboard.currencies.show');
+Route::get('dashboard/currencies/{currency}/edit', 'CurrencyController@edit')->name('dashboard.currencies.edit');
+Route::post('dashboard/currencies/create', 'CurrencyController@store')->name('dashboard.currencies.store');
+Route::put('dashboard/currencies/{currency}', 'CurrencyController@update')->name('dashboard.currencies.update');
+Route::put('dashboard/currencies/{currency}/status', 'CurrencyController@status_update')->name('dashboard.currencies.update.status');
+Route::put('dashboard/currencies/{currency}/delete', 'CurrencyController@soft_delete')->name('dashboard.currencies.delete');
+
+//vista dashboard paymentmethods 
+Route::get('dashboard/paymentmethods', 'PaymentMethodController@index')->name('dashboard.paymentmethods.index');
+Route::get('dashboard/paymentmethods/create', 'PaymentMethodController@create')->name('dashboard.paymentmethods.create');
+Route::get('dashboard/paymentmethods/{paymentmethod}', 'PaymentMethodController@show')->name('dashboard.paymentmethods.show');
+Route::get('dashboard/paymentmethods/{paymentmethod}/edit', 'PaymentMethodController@edit')->name('dashboard.paymentmethods.edit');
+Route::post('dashboard/paymentmethods/create', 'PaymentMethodController@store')->name('dashboard.paymentmethods.store');
+Route::put('dashboard/paymentmethods/{paymentmethod}', 'PaymentMethodController@update')->name('dashboard.paymentmethods.update');
+Route::put('dashboard/paymentmethods/{paymentmethod}/status', 'PaymentMethodController@status_update')->name('dashboard.paymentmethods.update.status');
+Route::put('dashboard/paymentmethods/{paymentmethod}/delete', 'PaymentMethodController@soft_delete')->name('dashboard.paymentmethods.delete');
+
+//vista dashboard categories 
+Route::get('dashboard/categories', 'CategoryController@index')->name('dashboard.categories.index');
+Route::get('dashboard/categories/create', 'CategoryController@create')->name('dashboard.categories.create');
+Route::get('dashboard/categories/{category}', 'CategoryController@show')->name('dashboard.categories.show');
+Route::get('dashboard/categories/{category}/edit', 'CategoryController@edit')->name('dashboard.categories.edit');
+Route::post('dashboard/categories/create', 'CategoryController@store')->name('dashboard.categories.store');
+Route::put('dashboard/categories/{category}', 'CategoryController@update')->name('dashboard.categories.update');
+Route::put('dashboard/categories/{category}/status', 'CategoryController@status_update')->name('dashboard.categories.update.status');
+Route::put('dashboard/categories/{category}/delete', 'CategoryController@soft_delete')->name('dashboard.categories.delete');

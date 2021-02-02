@@ -65,7 +65,7 @@
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Módulos</div>
                             <a class="nav-link" href="{{route('dashboard.orders.index')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                                 Órdenes
                             </a>
                             <a class="nav-link" href="{{route('dashboard.products.index')}}">
@@ -73,23 +73,23 @@
                                 Productos
                             </a>
                             <a class="nav-link" href="{{route('dashboard.users.index')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Usuarios 
                             </a>
                             <a class="nav-link" href="{{route('dashboard.roles.index')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-pencil-ruler"></i></div>
                                 Roles
                             </a>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <a class="nav-link" href="{{route('dashboard.currencies.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
                                 Monedas
                             </a>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <a class="nav-link" href="{{route('dashboard.paymentmethods.index')}}">
+                                <div class="sb-nav-link-icon"><i class="far fa-credit-card"></i></div>
                                 Formas de Pago
                             </a>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <a class="nav-link" href="{{route('dashboard.categories.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                                 Categorias
                             </a>
                         </div>
