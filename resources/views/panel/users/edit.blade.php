@@ -4,7 +4,7 @@
 
 @section('title-page','Usuarios')
 
-@section('subtitle-page','Crear nuevo usuario')
+@section('subtitle-page','Editar usuario')
 
 @section('content')
 

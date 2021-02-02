@@ -21,14 +21,12 @@ class UserController extends Controller
     }
 
     public function create(){
-
         return view('panel.users.create')->with([
             'roles' => Role::all(),
         ]);
     }
 
-    public function store(Request $request){
-        
+    public function store(Request $request){        
         $address = new Address();
         $address->address = $request->address;
         $address->city = $request->city;
@@ -53,7 +51,6 @@ class UserController extends Controller
     }
 
     public function show($user){
-
         $user = User::where('id',$user)->first();
         $address = Address::find($user->address_id);
         
@@ -65,7 +62,6 @@ class UserController extends Controller
     }
 
     public function edit($user){
-
         $user = User::where('id',$user)->first();
         $address = Address::find($user->address_id);
 
@@ -108,8 +104,7 @@ class UserController extends Controller
             ->withSuccess("El usuario {$user->name} con id {$user->id} fue creado con éxito");
     }
     
-    public function status_update(Request $request, $user){
-              
+    public function status_update(Request $request, $user){              
         $user_id = intval($user);
         $user = User::find($user_id);
         $user->status = $request->status;

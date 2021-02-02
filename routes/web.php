@@ -62,6 +62,7 @@ Route::get('dashboard/roles', 'RoleController@index')->name('dashboard.roles.ind
 Route::get('dashboard/roles/create', 'RoleController@create')->name('dashboard.roles.create');
 Route::get('dashboard/roles/{role}', 'RoleController@show')->name('dashboard.roles.show');
 Route::get('dashboard/roles/{role}/edit', 'RoleController@edit')->name('dashboard.roles.edit');
-Route::post('dashboard/roles', 'RoleController@store')->name('dashboard.roles.store');
-Route::match(['put', 'patch'], 'RoleController@update')->name('dashboard.roles.update');
-Route::delete('dashboard/roles/{role}', 'RoleController@destroy')->name('dashboard.roles.delete');
+Route::post('dashboard/roles/create', 'RoleController@store')->name('dashboard.roles.store');
+Route::put('dashboard/roles/{role}', 'RoleController@update')->name('dashboard.roles.update');
+Route::put('dashboard/roles/{role}/status', 'RoleController@status_update')->name('dashboard.roles.update.status');
+Route::put('dashboard/roles/{role}/delete', 'RoleController@soft_delete')->name('dashboard.roles.delete');

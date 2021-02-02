@@ -11,10 +11,8 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(){
-        
-        $products = Product::where('is_deleted',false)->get();
-        
+    public function index(){        
+        $products = Product::where('is_deleted',false)->get();        
         return view('panel.products.index')->with([
             'products' => $products,
             'categories' => Category::all(),
@@ -25,7 +23,6 @@ class ProductController extends Controller
     }
 
     public function create(){
-
         return view('panel.products.create')->with([
             'roles' => Role::all(),
             'categories' => Category::all()->sortBy('name'),
@@ -34,7 +31,6 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-
         $cost = new Cost();
         $cost->cost = $request->cost;
         $cost->currency_id = $request->currency_id;
@@ -55,7 +51,6 @@ class ProductController extends Controller
     }
 
     public function show($product){
-
         $product = Product::where('name',$product)->first();
         $category = Category::find($product->category_id);
         $cost = Cost::find($product->cost_id);
@@ -70,12 +65,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function categories(){
-        return "ok";
-    }
-
     public function edit($product){
-
         $product = Product::where('name',$product)->first();
 
         return view('panel.products.edit')->with([
@@ -110,8 +100,7 @@ class ProductController extends Controller
             ->withSuccess("El producto {$product->name} fue actualizado con éxito");
     }
     
-    public function status_update(Request $request, $product){
-              
+    public function status_update(Request $request, $product){              
         $product_id = intval($product);
         $product = Product::find($product_id);
         $product->status = $request->status;

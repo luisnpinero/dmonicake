@@ -30,7 +30,6 @@ class StoreController extends Controller
     }
 
     public function show_product($product){
-        //$category = Category::where('name',$category)->first();
         $product = Product::where('name',$product)->first();
         $cost = Cost::find($product->cost_id)->first();
         $currency = Currency::find($cost->currency_id)->first();

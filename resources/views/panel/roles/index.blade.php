@@ -51,17 +51,39 @@
                         <td>{{ $role->created_at}}</td>
                         <td>{{ $role->updated_at}}</td>
                         <td><div class="d-flex justify-content-around">
-                            <a href="#" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>  
-                            <a href="#" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{ route('dashboard.roles.show', $role->id) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a> 
+                            </button>
+                            
+                            <button class="btn btn-sm px-0 mx-0">
+                                <a href="{{route('dashboard.roles.edit',$role->id)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a> 
+                            </button>
 
-                            @if( $role->status == 'active' ) 
-                                <a href="#" title="Deshabilitar"><i class="fas fa-toggle-off text-danger"></i></a>
-                            @else
-                                <a href="#" title="Habilitar"><i class="fas fa-toggle-on text-success"></i></a>
-                            @endif
-                            <a href="#" title="Eliminar"><i class="fas fa-trash-alt fas-icon-purple"></i></a>
+                            <form action="{{ route('dashboard.roles.update.status', $role) }}" method="post">
+                                @csrf
+                                @method('put')
+                                
+                                @if( $role->status == 'active' )
+                                <button class="btn btn-sm px-0 mx-0" name="status" title="Deshabilitar" value="inactive">
+                                    <i class="fas fa-toggle-on text-success"></i>
+                                </button>
+                                @else
+                                <button class="btn btn-sm px-0 mx-0" name="status" value="active" title="Habilitar">
+                                    <i class="fas fa-toggle-off text-danger"></i>
+                                </button> 
+                                @endif
+                            </form>
+
+                            <form action="{{ route('dashboard.roles.delete',$role)}}" method="post">
+                                @csrf
+                                @method('put')
+                                <button type="submit" class="btn btn-sm px-0 mx-0" name="is_deleted" title="Borrar" value=1>
+                                    <i class="fas fa-trash-alt text-danger"></i>
+                                </button>                             
+                            </form>
+
                             </div>
-                        </td>
+                        </td>                    
                     </tr>
                 @endforeach                    
             </tbody>

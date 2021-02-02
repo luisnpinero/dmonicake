@@ -22,16 +22,7 @@ class OrderController extends Controller
             ]);
     }
 
-    public function create(){
-        //
-    }
-
-    public function store(){
-        //
-    }
-
     public function show($order){
-
         $order = Order::find($order);
         
         return view('panel.orders.show')->with([
@@ -45,21 +36,6 @@ class OrderController extends Controller
             'user' => $user = User::find($order->user_id),
         ]);
     }
-
-    public function categories(){
-        //
-    }
-
-    public function edit($order){
-        return "vista dashboard user edit {$user}";
-        // return view('index');
-    }
-
-
-    public function update($user){
-        // return view('index')
-    }
-
         
     public function status_update(Request $request, $order){
 

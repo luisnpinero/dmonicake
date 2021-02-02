@@ -18,6 +18,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('name');
             $table->string('status')->default('active');
             $table->integer('modified_by')->nullable()->default('1');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
