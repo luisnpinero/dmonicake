@@ -63,6 +63,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Dashboard
                             </a>                            
+                            <a class="nav-link" href="{{route('dashboard.contact.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
+                                Contacto
+                            </a>                            
                             <div class="sb-sidenav-menu-heading">Módulos</div>
                             <a class="nav-link" href="{{route('dashboard.orders.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>

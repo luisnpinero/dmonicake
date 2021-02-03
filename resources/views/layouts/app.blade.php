@@ -28,8 +28,7 @@
 
 </head>
 <body>
-
-    <div id="app">
+    <div id="app" style="min-height: 92.7vh">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -115,8 +114,9 @@
         <main class="pb-4">
             @yield('content')
         </main>
-    </div>
 
+    </div>
+</body>
     <footer class="mt-6 py-4 bg-white">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Luis Piñero 2021</p>
@@ -128,5 +128,4 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     @yield('script')        
     
-</body>
 </html>

@@ -22,6 +22,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('root');
+Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 //Rutas Vistas Store
 Route::get('store', 'StoreController@index')->name('store.index');
@@ -46,6 +49,12 @@ Route::get('dashboard/orders', 'OrderController@index')->name('dashboard.orders.
 Route::get('dashboard/orders/{Orders}', 'OrderController@show')->name('dashboard.orders.show');
 Route::put('dashboard/orders/{orders}/status', 'OrderController@status_update')->name('dashboard.orders.update.status');
 Route::put('dashboard/orders/{order}/delete', 'OrderController@soft_delete')->name('dashboard.orders.delete');
+
+//vista dashboard contacto
+Route::get('dashboard/contact', 'ContactController@index')->name('dashboard.contact.index');
+Route::get('dashboard/contact/{contact}', 'ContactController@show')->name('dashboard.contact.show');
+Route::put('dashboard/contact/{contact}/status', 'ContactController@status_update')->name('dashboard.contact.update.status');
+
 
 //vista dashboard usuarios
 Route::get('dashboard/users', 'UserController@index')->name('dashboard.users.index');
