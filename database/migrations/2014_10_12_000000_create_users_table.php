@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('status')->default('active');
             $table->foreignId('address_id')->constrained('addresses');
-            $table->foreignId('role_id')->constrained('roles');
+            $table->foreignId('role_id')->constrained('roles')->default('1');
             $table->integer('modified_by')->nullable()->default('1');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
