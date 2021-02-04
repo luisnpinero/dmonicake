@@ -61,15 +61,14 @@
                                         <form action="{{ route('dashboard.contact.update.status', $contact) }}" method="post">
                                             @csrf
                                             @method('put')
-
                                             <div class="d-flex flex-row-reverse pb-4">
                                                 @if( $contact->status == 'attended' )
                                                 <button class="btn btn-danger" name="status" value="non attended">
-                                                    No atendido <i class="fas fa-check-circle"></i>
+                                                    Marcar como No atendido <i class="fas fa-check-circle"></i>
                                                 </button>
                                                 @else
-                                                <button class="btn btn-success" name="status" value="non attended">
-                                                    Atendido <i class="fas fa-check-circle"></i>
+                                                <button class="btn btn-success" name="status" value="attended">
+                                                    Marcar como Atendido <i class="fas fa-check-circle"></i>
                                                 </button>
                                                 @endif
                                             </div>

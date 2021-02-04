@@ -60,12 +60,12 @@
                                     @method('put')
                                     
                                     @if( $contact->status == 'attended' )
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="non attended">
-                                        <i class="fas fa-check-circle text-success"></i>
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="non attended" title="Marcar como no atendido">
+                                        <i class="far fa-check-circle text-danger"></i>
                                     </button>
                                     @else
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="attended">
-                                        <i class="far fa-check-circle text-danger"></i>
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="attended" title="Marcar como atendido">
+                                        <i class="fas fa-check-circle text-success"></i>
                                     </button>
                                     @endif
                                 </form>
