@@ -12,8 +12,11 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
     public function index(){
-        $categories = Category::all();
-        $products = Product::paginate(12);
+        $categories = Category::where('is_deleted',false)
+            ->orWhere('status','inactive')
+            ->get();
+        $products = Product::where('is_deleted',false);
+        $products = $products->paginate(12);
         $costs = Cost::all();
         $currencies = Currency::all();
 

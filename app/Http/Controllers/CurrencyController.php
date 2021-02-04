@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Currency;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CurrencyController extends Controller
 {
@@ -13,18 +14,15 @@ class CurrencyController extends Controller
     }
 
     public function index(){
-        $currencies = Currency::where('is_deleted',false)->get();
         return view('panel.currencies.index')->with([
-            'currencies' => $currencies,
-            'roles' => Role::all(),
+            'currencies' => Currency::where('is_deleted',false)->get(),
+            'roles' => Role::where('is_deleted',false)->get(),
             ]);
     }
 
     public function create(){
-
         return view('panel.currencies.create')->with([
-            'currencies' => Currency::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
@@ -32,6 +30,7 @@ class CurrencyController extends Controller
         $currency = new Currency();
         $currency->name = $request->name;
         $currency->status = $request->status;
+        $currency->modified_by = Auth::user()->id;
         $currency->save();
 
         return redirect()
@@ -39,31 +38,24 @@ class CurrencyController extends Controller
             ->withSuccess("La moneda {$currency->name} con id {$currency->id} fue creado con éxito");
     }
 
-    public function show($currency){
-        $currency = Currency::find($currency)->first();
-
+    public function show(Currency $currency){
         return view('panel.currencies.show')->with([
-            'currencies' => Currency::all(),
             'currency' => $currency,
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function edit($currency){
-        $currency = Currency::where('id',$currency)->first();
-        
+    public function edit(Currency $currency){
         return view('panel.currencies.edit')->with([
             'currency' => $currency,
-            'currencies' => Currency::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function update(Request $request, $currency){
-        $role_id = intval($currency);
-        $currency = Currency::find($role_id);
+    public function update(Request $request, Currency $currency){
         $currency->name = $request->name;
         $currency->status = $request->status;
+        $currency->modified_by = Auth::user()->id;
         $currency->save();
 
         return redirect()
@@ -71,10 +63,9 @@ class CurrencyController extends Controller
             ->withSuccess("La moneda {$currency->name} con id {$currency->id} fue actualizado con éxito");
     }
 
-    public function status_update(Request $request, $currency){              
-        $role_id = intval($currency);
-        $currency = Currency::find($role_id);
+    public function status_update(Request $request, Currency $currency){              
         $currency->status = $request->status;
+        $currency->modified_by = Auth::user()->id;
         $currency->save();
 
         return redirect()
@@ -82,10 +73,10 @@ class CurrencyController extends Controller
             ->withSuccess("La moneda {$currency->name} fue actualizado con éxito");
     }
 
-    public function soft_delete(Request $request, $currency){              
-        $role_id = intval($currency);
-        $currency = Currency::find($role_id);
+    public function soft_delete(Request $request, Currency $currency){              
         $currency->is_deleted = $request->is_deleted;
+        $currency->status = 'inactive';
+        $currency->modified_by = Auth::user()->id;
         $currency->save();
 
         return redirect()

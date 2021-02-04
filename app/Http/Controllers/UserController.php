@@ -8,6 +8,7 @@ use App\Models\Cost;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -20,13 +21,13 @@ class UserController extends Controller
         $users = User::where('is_deleted',false)->get();
         return view('panel.users.index')->with([
             'roles' => Role::all(),
-            'users' => $users,
+            'users' => User::where('is_deleted',false)->get(),
             ]);
     }
 
     public function create(){
         return view('panel.users.create')->with([
-            'roles' => Role::all(),
+            'roles' => Role::where('status','active')->get(),
         ]);
     }
 
@@ -47,6 +48,7 @@ class UserController extends Controller
         $user->address_id = $address->id;
         $user->role_id = $request->role_id;
         $user->password = Hash::make($request->password);
+        $user->modified_by = Auth::user()->id;
         $user->save();
 
         return redirect()
@@ -54,32 +56,23 @@ class UserController extends Controller
             ->withSuccess("El usuario {$user->name} con id {$user->id} fue creado con éxito");
     }
 
-    public function show($user){
-        $user = User::where('id',$user)->first();
-        $address = Address::find($user->address_id);
-        
+    public function show(User $user){
         return view('panel.users.show')->with([
-            'user' => $user,
+            'address' => Address::find($user->address_id),
             'roles' => Role::all(),
-            'address' => $address,
+            'user' => $user,
         ]);
     }
 
-    public function edit($user){
-        $user = User::where('id',$user)->first();
-        $address = Address::find($user->address_id);
-
+    public function edit(User $user){
         return view('panel.users.edit')->with([
             'user' => $user,
-            'roles' => Role::all(),
-            'address' => $address,
+            'roles' => Role::where('is_deleted',false)->get(),
+            'address' => Address::find($user->address_id),
         ]);
     }
 
-    public function update(Request $request, $user){
-        $user_id = intval($user);
-        $user = User::find($user_id);
-
+    public function update(Request $request, User $user){
         $address = new Address();
         $address->address = $request->address;
         $address->city = $request->city;
@@ -93,6 +86,7 @@ class UserController extends Controller
         $user->phone_number = $request->phone_number;
         $user->address_id = $address->id;
         $user->role_id = $request->role_id;
+        $user->modified_by = Auth::user()->id;
         if($request->email == $user->email){
         }else{
             $user->email = $request->email;
@@ -107,10 +101,9 @@ class UserController extends Controller
             ->withSuccess("El usuario {$user->name} con id {$user->id} fue creado con éxito");
     }
 
-    public function status_update(Request $request, $user){              
-        $user_id = intval($user);
-        $user = User::find($user_id);
+    public function status_update(Request $request, User $user){
         $user->status = $request->status;
+        $user->modified_by = Auth::user()->id;
         $user->save();
 
         return redirect()
@@ -118,10 +111,9 @@ class UserController extends Controller
             ->withSuccess("El usuario {$user->first_name} fue actualizado con éxito");
     }
 
-    public function soft_delete(Request $request, $user){
-        $user_id = intval($user);
-        $user = User::find($user_id);
+    public function soft_delete(Request $request, User $user){
         $user->is_deleted = $request->is_deleted;
+        $user->modified_by = Auth::user()->id;
         $user->save();
 
         return redirect()

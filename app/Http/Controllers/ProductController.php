@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -16,21 +17,20 @@ class ProductController extends Controller
     }
 
     public function index(){        
-        $products = Product::where('is_deleted',false)->get();        
         return view('panel.products.index')->with([
-            'products' => $products,
+            'products' => Product::where('is_deleted',false)->get(),
             'categories' => Category::all(),
             'currencies' => Currency::all(),
             'costs' => Cost::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
             ]);
     }
 
     public function create(){
         return view('panel.products.create')->with([
-            'roles' => Role::all(),
-            'categories' => Category::all()->sortBy('name'),
-            'currencies' => Currency::all()->sortBy('name'),
+            'roles' => Role::where('is_deleted',false)->get(),
+            'categories' => Category::where('status','active')->get()->sortBy('name'),
+            'currencies' => Currency::where('status','active')->get()->sortBy('name'),
         ]);
     }
 
@@ -38,6 +38,7 @@ class ProductController extends Controller
         $cost = new Cost();
         $cost->cost = $request->cost;
         $cost->currency_id = $request->currency_id;
+        $cost->modified_by = Auth::user()->id;
         $cost->save();
 
         $product = new Product();
@@ -47,6 +48,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->cost_id = $cost->id;
         $product->category_id = $request->category_id;
+        $product->modified_by = Auth::user()->id;
         $product->save();
 
         return redirect()
@@ -54,41 +56,33 @@ class ProductController extends Controller
             ->withSuccess("El producto {$product->name} con id {$product->id} fue creado con éxito");
     }
 
-    public function show($product){
-        $product = Product::where('name',$product)->first();
-        $category = Category::find($product->category_id);
+    public function show(Product $product){
         $cost = Cost::find($product->cost_id);
-        $currency = Currency::find($cost->currency_id);
-        
         return view('panel.products.show')->with([
             'product' => $product,
-            'roles' => Role::all(),
-            'category' => $category,
-            'currency' => $currency,
+            'roles' => Role::where('is_deleted',false)->get(),
+            'category' => Category::find($product->category_id),
             'cost' => $cost,
+            'currency' => Currency::find($cost->currency_id),
         ]);
     }
 
-    public function edit($product){
-        $product = Product::where('name',$product)->first();
-
+    public function edit(Product $product){
         return view('panel.products.edit')->with([
             'product' => $product,
-            'categories' => Category::all(),
-            'currencies' => Currency::all(),
-            'costs' => Cost::all(),
-            'roles' => Role::all(),
+            'categories' => Category::where('status','active')->get(),
+            'currencies' => Currency::where('status','active')->get(),
+            'costs' => Cost::find($product->cost_id)->get(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
 
-    public function update(Request $request, $product){
-        $product_id = intval($product);
-        $product = Product::find($product_id);
-
+    public function update(Request $request, Product $product){
         $cost = new Cost();
         $cost->cost = $request->cost;
         $cost->currency_id = $request->currency_id;
+        $cost->modified_by = Auth::user()->id;
         $cost->save();
         
         $product->name = $request->name;
@@ -97,6 +91,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->cost_id = $cost->id;
         $product->category_id = $request->category_id;
+        $product->modified_by = Auth::user()->id;
         $product->save();
 
         return redirect()
@@ -104,10 +99,9 @@ class ProductController extends Controller
             ->withSuccess("El producto {$product->name} fue actualizado con éxito");
     }
     
-    public function status_update(Request $request, $product){              
-        $product_id = intval($product);
-        $product = Product::find($product_id);
+    public function status_update(Request $request, Product $product){
         $product->status = $request->status;
+        $product->modified_by = Auth::user()->id;
         $product->save();
 
         return redirect()
@@ -115,10 +109,10 @@ class ProductController extends Controller
             ->withSuccess("El producto {$product->nombre} fue actualizado con éxito");
     }
 
-    public function soft_delete(Request $request, $product){
-        $product_id = intval($product);
-        $product = Product::find($product_id);
+    public function soft_delete(Request $request, Product $product){
         $product->is_deleted = $request->is_deleted;
+        $product->modified_by = Auth::user()->id;
+        $product->status = 'inactive';
         $product->save();
 
         return redirect()

@@ -25,6 +25,10 @@
                                 <th class="pl-0 w-25" scope="row"><strong>Nombre</strong></th>
                                 <td>{{ $category->name }}</td>
                             </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Estado</strong></th>
+                                <td>{{ $category->status }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

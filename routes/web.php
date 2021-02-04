@@ -28,16 +28,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('dashboard/products', 'ProductController@index')->name('dashboard.products.index');
     Route::get('dashboard/products/create', 'ProductController@create')->name('dashboard.products.create');
     Route::get('dashboard/products/{product}', 'ProductController@show')->name('dashboard.products.show');
-    Route::get('dashboard/products/{products}/edit', 'ProductController@edit')->name('dashboard.products.edit');
+    Route::get('dashboard/products/{product}/edit', 'ProductController@edit')->name('dashboard.products.edit');
     Route::post('dashboard/products/create', 'ProductController@store')->name('dashboard.products.store');
-    Route::put('dashboard/products/{products}', 'ProductController@update')->name('dashboard.products.update');
-    Route::put('dashboard/products/{products}/status', 'ProductController@status_update')->name('dashboard.products.update.status');
-    Route::put('dashboard/products/{products}/delete', 'ProductController@soft_delete')->name('dashboard.products.delete');
+    Route::put('dashboard/products/{product}', 'ProductController@update')->name('dashboard.products.update');
+    Route::put('dashboard/products/{product}/status', 'ProductController@status_update')->name('dashboard.products.update.status');
+    Route::put('dashboard/products/{product}/delete', 'ProductController@soft_delete')->name('dashboard.products.delete');
 
     //vista dashboard ordenes
     Route::get('dashboard/orders', 'OrderController@index')->name('dashboard.orders.index');
-    Route::get('dashboard/orders/{Orders}', 'OrderController@show')->name('dashboard.orders.show');
-    Route::put('dashboard/orders/{orders}/status', 'OrderController@status_update')->name('dashboard.orders.update.status');
+    Route::get('dashboard/orders/{order}', 'OrderController@show')->name('dashboard.orders.show');
+    Route::put('dashboard/orders/{order}/status', 'OrderController@status_update')->name('dashboard.orders.update.status');
     Route::put('dashboard/orders/{order}/delete', 'OrderController@soft_delete')->name('dashboard.orders.delete');
 
     //vista dashboard contacto
@@ -52,9 +52,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('dashboard/users/{user}', 'UserController@show')->name('dashboard.users.show');
     Route::get('dashboard/users/{user}/edit', 'UserController@edit')->name('dashboard.users.edit');
     Route::post('dashboard/users/create', 'UserController@store')->name('dashboard.users.store');
-    Route::put('dashboard/users/{users}', 'UserController@update')->name('dashboard.users.update');
-    Route::put('dashboard/users/{users}/status', 'UserController@status_update')->name('dashboard.users.update.status');
-    Route::put('dashboard/users/{users}/delete', 'UserController@soft_delete')->name('dashboard.users.delete');
+    Route::put('dashboard/users/{user}', 'UserController@update')->name('dashboard.users.update');
+    Route::put('dashboard/users/{user}/status', 'UserController@status_update')->name('dashboard.users.update.status');
+    Route::put('dashboard/users/{user}/delete', 'UserController@soft_delete')->name('dashboard.users.delete');
 
     //vista dashboard roles
     Route::get('dashboard/roles', 'RoleController@index')->name('dashboard.roles.index');

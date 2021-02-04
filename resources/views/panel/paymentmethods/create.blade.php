@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="status" class="col-md-4 col-form-label text-md-right">Estado de la Moneda</label>
+                <label for="status" class="col-md-4 col-form-label text-md-right">Estado del Metodo de Pago</label>
                 <div class="col-md-6">
                     <select name="status" class="custom-select" id="status" required autofocus>
                         <option value="" selected disabled>Escoge una opción</option>

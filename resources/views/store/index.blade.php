@@ -80,10 +80,10 @@
           </div>
         </div>
         @endforeach
-        {{ $products->links() }}
         @endif
       </div>
       <!-- /.row -->
+      {{ $products->links() }}
     </div>
     <!-- /.col-lg-9 -->
   </div>

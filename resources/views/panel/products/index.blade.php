@@ -56,10 +56,10 @@
                         <td>
                             <div class="d-flex justify-content-around">
                                 <button class="btn btn-sm px-0 mx-0">
-                                    <a href="{{ route('dashboard.products.show', $product->name) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>
+                                    <a href="{{ route('dashboard.products.show', $product) }}" title="Ver"><i class="fas fa-eye fas-icon-purple"></i></a>
                                 </button>
                                 <button class="btn btn-sm px-0 mx-0">
-                                    <a href="{{route('dashboard.products.edit',$product->name)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a>
+                                    <a href="{{route('dashboard.products.edit',$product)}}" title="Editar"><i class="fas fa-edit fas-icon-purple"></i></a>
                                 </button>
                                 
                                 <form action="{{ route('dashboard.products.update.status', $product) }}" method="post">

@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('payment_method_id')->constrained('payment_methods');
             $table->boolean('is_deleted')->default(false);
+            $table->integer('modified_by')->default('0');
             $table->timestamps();
         });
     }

@@ -15,9 +15,8 @@ class DashboardController extends Controller
 
     public function index(){
         return view('panel.index')->with([
-            'products' => Product::all(),
-            'roles' => Role::all(),
-            'users' => User::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
+            'users' => User::where('is_deleted',false)->get(),
         ]);
     }
 }

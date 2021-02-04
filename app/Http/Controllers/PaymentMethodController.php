@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PaymentMethod;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentMethodController extends Controller
 {
@@ -12,15 +13,13 @@ class PaymentMethodController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        $paymentmethods = PaymentMethod::where('is_deleted',false)->get();
         return view('panel.paymentmethods.index')->with([
-            'paymentmethods' => $paymentmethods,
-            'roles' => Role::all(),
+            'paymentmethods' => PaymentMethod::where('is_deleted',false)->get(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
     public function create(){
-
         return view('panel.paymentmethods.create')->with([
             'paymentmethods' => PaymentMethod::all(),
             'roles' => Role::all(),
@@ -31,6 +30,7 @@ class PaymentMethodController extends Controller
         $paymentmethod = new PaymentMethod();
         $paymentmethod->name = $request->name;
         $paymentmethod->status = $request->status;
+        $paymentmethod->modified_by = Auth::user()->id;
         $paymentmethod->save();
 
         return redirect()
@@ -38,9 +38,7 @@ class PaymentMethodController extends Controller
             ->withSuccess("El metodo de pago {$paymentmethod->name} con id {$paymentmethod->id} fue creado con éxito");
     }
 
-    public function show($paymentmethod){
-        $paymentmethod = PaymentMethod::find($paymentmethod)->first();
-
+    public function show(PaymentMethod $paymentmethod){
         return view('panel.paymentmethods.show')->with([
             'paymentmethods' => PaymentMethod::all(),
             'paymentmethod' => $paymentmethod,
@@ -48,9 +46,7 @@ class PaymentMethodController extends Controller
         ]);
     }
 
-    public function edit($paymentmethod){
-        $paymentmethod = PaymentMethod::where('id',$paymentmethod)->first();
-        
+    public function edit(PaymentMethod $paymentmethod){
         return view('panel.paymentmethods.edit')->with([
             'paymentmethod' => $paymentmethod,
             'paymentmethods' => PaymentMethod::all(),
@@ -58,9 +54,7 @@ class PaymentMethodController extends Controller
         ]);
     }
 
-    public function update(Request $request, $paymentmethod){
-        $role_id = intval($paymentmethod);
-        $paymentmethod = PaymentMethod::find($role_id);
+    public function update(Request $request, PaymentMethod $paymentmethod){
         $paymentmethod->name = $request->name;
         $paymentmethod->status = $request->status;
         $paymentmethod->save();
@@ -70,10 +64,9 @@ class PaymentMethodController extends Controller
             ->withSuccess("El metodo de pago {$paymentmethod->name} con id {$paymentmethod->id} fue actualizado con éxito");
     }
 
-    public function status_update(Request $request, $paymentmethod){              
-        $role_id = intval($paymentmethod);
-        $paymentmethod = PaymentMethod::find($role_id);
+    public function status_update(Request $request, PaymentMethod $paymentmethod){              
         $paymentmethod->status = $request->status;
+        $paymentmethod->modified_by = Auth::user()->id;
         $paymentmethod->save();
 
         return redirect()
@@ -81,10 +74,10 @@ class PaymentMethodController extends Controller
             ->withSuccess("El metodo de pago {$paymentmethod->name} fue actualizado con éxito");
     }
 
-    public function soft_delete(Request $request, $paymentmethod){              
-        $role_id = intval($paymentmethod);
-        $paymentmethod = PaymentMethod::find($role_id);
+    public function soft_delete(Request $request, PaymentMethod $paymentmethod){
         $paymentmethod->is_deleted = $request->is_deleted;
+        $paymentmethod->status = 'inactive';
+        $paymentmethod->modified_by = Auth::user()->id;
         $paymentmethod->save();
 
         return redirect()

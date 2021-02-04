@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -13,18 +14,15 @@ class CategoryController extends Controller
     }
 
     public function index(){
-        $categories = Category::where('is_deleted',false)->get();
         return view('panel.categories.index')->with([
-            'categories' => $categories,
-            'roles' => Role::all(),
+            'categories' => Category::where('is_deleted',false)->get(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
     public function create(){
-
         return view('panel.categories.create')->with([
-            'categories' => Category::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
@@ -32,6 +30,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->status = $request->status;
+        $category->modified_by = Auth::user()->id;
         $category->save();
 
         return redirect()
@@ -39,42 +38,34 @@ class CategoryController extends Controller
             ->withSuccess("La categoria {$category->name} con id {$category->id} fue creado con éxito");
     }
 
-    public function show($category){
-        $category = Category::find($category)->first();
-
+    public function show(Category $category){
         return view('panel.categories.show')->with([
-            'categories' => Category::all(),
             'category' => $category,
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function edit($category){
-        $category = Category::where('id',$category)->first();
-
+    public function edit(Category $category){
         return view('panel.categories.edit')->with([
             'category' => $category,
-            'categories' => Category::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function update(Request $request, $category){
-        $role_id = intval($category);
-        $category = Category::find($role_id);
+    public function update(Request $request, Category $category){
         $category->name = $request->name;
         $category->status = $request->status;
+        $category->modified_by = Auth::user()->id;
         $category->save();
 
         return redirect()
             ->route('dashboard.categories.index')
-            ->withSuccess("La categoria {$category->name} con id {$category->id} fue actualizado con éxito");
+            ->withSuccess("La categoria {$category->name} con id {$category->id} fue actualizada con éxito");
     }
 
-    public function status_update(Request $request, $category){              
-        $role_id = intval($category);
-        $category = Category::find($role_id);
+    public function status_update(Request $request, Category $category){              
         $category->status = $request->status;
+        $category->modified_by = Auth::user()->id;
         $category->save();
 
         return redirect()
@@ -82,10 +73,10 @@ class CategoryController extends Controller
             ->withSuccess("La categoria {$category->name} fue actualizado con éxito");
     }
 
-    public function soft_delete(Request $request, $category){              
-        $role_id = intval($category);
-        $category = Category::find($role_id);
+    public function soft_delete(Request $request, Category $category){              
         $category->is_deleted = $request->is_deleted;
+        $category->modified_by = Auth::user()->id;
+        $category->status = 'inactive';
         $category->save();
 
         return redirect()

@@ -73,6 +73,11 @@
                                     <th class="pl-0 w-25"><strong>Actualizado</strong></th>
                                     <td>{{ $user->updated_at }} </td>
                                 </tr>
+
+                                <tr>
+                                    <th class="pl-0 w-25"><strong>Estado</strong></th>
+                                    <td>{{ $user->status }} </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

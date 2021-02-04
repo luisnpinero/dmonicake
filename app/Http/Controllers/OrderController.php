@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -19,16 +20,14 @@ class OrderController extends Controller
 
     public function index(){
         return view('panel.orders.index')->with([
-            'orders' => Order::all(),
+            'orders' => Order::where('is_deleted',false)->get(),
             'currencies' => Currency::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
             'users' => User::all(),
             ]);
     }
 
-    public function show($order){
-        $order = Order::find($order);
-        
+    public function show(Order $order){
         return view('panel.orders.show')->with([
             'order' => $order,
             'roles' => Role::all(),
@@ -36,15 +35,13 @@ class OrderController extends Controller
             'categories' => Category::all(),
             'currencies' => Currency::all(),
             'costs' => Cost::all(),
-
-            'user' => $user = User::find($order->user_id),
+            'user' => User::find($order->user_id),
         ]);
     }
 
-    public function status_update(Request $request, $order){
-
-        $order = Order::find($order);
+    public function status_update(Request $request, Order $order){
         $order->status = $request->status;
+        $order->modified_by = Auth::user()->id;
         $order->save();
 
         return redirect()
@@ -52,9 +49,10 @@ class OrderController extends Controller
             ->withSuccess("La orden {$order->id} fue actualizada con éxito");
     }
 
-    public function soft_delete(Request $request, $order){
-        $order = Order::find($order);
+    public function soft_delete(Request $request, Order $order){
         $order->is_deleted = $request->is_deleted;
+        $order->modified_by = Auth::user()->id;
+        $order->status = 'inactive';
         $order->save();
 
         return redirect()

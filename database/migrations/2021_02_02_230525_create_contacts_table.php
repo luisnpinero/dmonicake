@@ -20,6 +20,7 @@ class CreateContactsTable extends Migration
             $table->string('email');
             $table->string('message');
             $table->string('status')->default('non attended');
+            $table->integer('attended_by');
             $table->timestamps();
         });
     }

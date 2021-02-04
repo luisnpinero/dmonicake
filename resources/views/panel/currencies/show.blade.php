@@ -26,6 +26,10 @@
                                 <th class="pl-0 w-25" scope="row"><strong>Nombre</strong></th>
                                 <td>{{ $currency->name }}</td>
                             </tr>
+                            <tr>
+                                <th class="pl-0 w-25" scope="row"><strong>Nombre</strong></th>
+                                <td>{{ $currency->status }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

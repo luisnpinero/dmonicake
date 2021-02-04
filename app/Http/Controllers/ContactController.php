@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Contacts;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -16,20 +17,18 @@ class ContactController extends Controller
     public function index(){
         return view('panel.contacts.index')->with([
             'contacts' => Contact::all(),
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function show($contact){
-        $contact = Contact::find($contact);
+    public function show(Contact $contact){
         return view('panel.contacts.show')->with([
             'contact' => $contact,
-            'roles' => Role::all(),
+            'roles' => Role::where('is_deleted',false)->get(),
         ]);
     }
 
-    public function status_update(Request $request, $contact){
-        $contact = Contact::find($contact);
+    public function status_update(Request $request, Contact $contact){
         $contact->status = $request->status;
         $contact->save();
 
@@ -38,13 +37,13 @@ class ContactController extends Controller
             ->withSuccess("El mensaje {$contact->id} fue actualizada con éxito");
     }
 
-    public function store(Request $request){        
-        
+    public function store(Request $request){
         $contact = new Contact();
         $contact->name = $request->name;
         $contact->email = $request->email;
         $contact->phone_number = $request->phone_number;
         $contact->message = $request->message;
+        $contact->attended_by = Auth::user()->id;
         $contact->save();
 
         return redirect()
