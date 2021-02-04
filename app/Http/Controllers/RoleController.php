@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $roles = Role::where('is_deleted',false)->get();
         return view('panel.roles.index')->with([
@@ -71,8 +75,8 @@ class RoleController extends Controller
         $role->save();
 
         return redirect()
-             ->route('dashboard.roles.index')
-             ->withSuccess("El rol {$role->name} fue actualizado con éxito");
+            ->route('dashboard.roles.index')
+            ->withSuccess("El rol {$role->name} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $role){              
@@ -82,8 +86,8 @@ class RoleController extends Controller
         $role->save();
 
         return redirect()
-             ->route('dashboard.roles.index')
-             ->withSuccess("El rol {$role->name} fue actualizado con éxito");
+            ->route('dashboard.roles.index')
+            ->withSuccess("El rol {$role->name} fue actualizado con éxito");
     }
 
 }

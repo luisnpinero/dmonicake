@@ -12,7 +12,7 @@
     <div class="card-body">
         <form action="{{route('dashboard.categories.store')}}" method="post">
             @csrf
-
+            
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                 <div class="col-md-6">
@@ -27,9 +27,9 @@
                         <option value="" selected>Escoge una opción</option>
                         <option value="active">Activo</option>
                         <option value="inactive">No Activo</option>
-                    </select>  
-                </div>              
-            </div>    
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="button" class="col-md-4 col-form-label text-md-right"></label>
@@ -39,7 +39,7 @@
                 <div class="col-md-2">
                     <a href="{{route('dashboard.categories.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
-            </div>           
+            </div>
         </form>
     </div>
 </div>

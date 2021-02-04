@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('root');
 Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
 Route::get('/contact', 'HomeController@contact')->name('contact');
-Route::post('/contact', 'ContactController@store')->name('contact.store');
+Route::post('/contact', 'StoreController@store_contact')->name('contact.store');
 
 //Rutas Vistas Store
 Route::get('store', 'StoreController@index')->name('store.index');
@@ -52,7 +52,7 @@ Route::put('dashboard/orders/{order}/delete', 'OrderController@soft_delete')->na
 
 //vista dashboard contacto
 Route::get('dashboard/contact', 'ContactController@index')->name('dashboard.contact.index');
-Route::get('dashboard/contact/{contact}', 'ContactController@show')->name('dashboard.contact.show');
+Route::get('dashboard/contact/{contact}', 'DashboardController@show')->name('dashboard.contact.show');
 Route::put('dashboard/contact/{contact}/status', 'ContactController@status_update')->name('dashboard.contact.update.status');
 
 

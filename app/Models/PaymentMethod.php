@@ -10,6 +10,7 @@ use App\Models\Order;
 class PaymentMethod extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'status',

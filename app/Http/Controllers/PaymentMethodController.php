@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index(){
         $paymentmethods = PaymentMethod::where('is_deleted',false)->get();
         return view('panel.paymentmethods.index')->with([
             'paymentmethods' => $paymentmethods,
             'roles' => Role::all(),
-            ]);
+        ]);
     }
 
     public function create(){
@@ -24,8 +27,7 @@ class PaymentMethodController extends Controller
         ]);
     }
 
-    public function store(Request $request){        
-        
+    public function store(Request $request){
         $paymentmethod = new PaymentMethod();
         $paymentmethod->name = $request->name;
         $paymentmethod->status = $request->status;
@@ -75,8 +77,8 @@ class PaymentMethodController extends Controller
         $paymentmethod->save();
 
         return redirect()
-             ->route('dashboard.paymentmethods.index')
-             ->withSuccess("El metodo de pago {$paymentmethod->name} fue actualizado con éxito");
+            ->route('dashboard.paymentmethods.index')
+            ->withSuccess("El metodo de pago {$paymentmethod->name} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $paymentmethod){              
@@ -86,7 +88,7 @@ class PaymentMethodController extends Controller
         $paymentmethod->save();
 
         return redirect()
-             ->route('dashboard.paymentmethods.index')
-             ->withSuccess("El metodo de pago {$paymentmethod->name} fue actualizado con éxito");
+            ->route('dashboard.paymentmethods.index')
+            ->withSuccess("El metodo de pago {$paymentmethod->name} fue actualizado con éxito");
     }
 }

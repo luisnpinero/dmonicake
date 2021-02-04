@@ -5,44 +5,40 @@
 @section('title-page','Ordenes')
 
 @section('subtitle-page')
+Vista de orden
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 @endsection
 
 @section('content')
-
 <div class=container-fluid>
-
-    
     <div class="card mb-4">
-
         <div class="card-header">
-                Orden: <b>{{ $order->id }}</b>
+            Orden: <b>{{ $order->id }}</b>
         </div>
-            
+
         <div class="card-body">
             @csrf
             <!--Section: Block Content-->
-            
+
             {{-- fotos del producto --}}
             <div class="row">
-                    
                 <div class="col-md-6">
                     <div class="table-responsive">
                         <table class="table table-sm table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                <th class="pl-0 w-25" scope="row"><strong>ID</strong></th>
-                                <td>{{ $order->id }}</td>
+                                    <th class="pl-0 w-25" scope="row"><strong>ID</strong></th>
+                                    <td>{{ $order->id }}</td>
                                 </tr>
-
+                                
                                 <tr>
                                     <th class="pl-0 w-25" scope="row"><strong>Descripción</strong></th>
                                     <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                 </tr>
-
+                                
                                 <tr>
                                     <th class="pl-0 w-25" scope="row"><strong>Total</strong></th>
                                     <td>{{ $order->total }}</td>
@@ -59,7 +55,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>               
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,22 +96,20 @@
                             <td>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name}} {{ $costs->find($product->cost_id)->cost}}</td>
                             <td>{{ $product->status}}</td>
                         </tr>
-                    @endforeach                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('scripts')
-  
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>  
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>  
-    <script>
-        $(document).ready( function () {
-            $('#dataTable').DataTable();
-        });
-    </script>  
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#dataTable').DataTable();
+});
+</script>
 @endsection

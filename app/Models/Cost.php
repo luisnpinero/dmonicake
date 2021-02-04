@@ -13,6 +13,7 @@ use App\Models\Product;
 class Cost extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'cost',
         'modified_by',

@@ -13,7 +13,7 @@
         <form action="{{route('dashboard.categories.update', $category) }}" method="post">
             @csrf
             @method('put')
-
+            
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                 <div class="col-md-6">
@@ -28,9 +28,9 @@
                         <option value="" selected>Escoge una opción</option>
                         <option {{ $category->status == 'active' ? 'selected' : ''}} value="active">Activo</option>
                         <option {{ $category->status == 'inactive' ? 'selected' : ''}} value="inactive">No Activo</option>
-                    </select>  
-                </div>              
-            </div>    
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="button" class="col-md-4 col-form-label text-md-right"></label>
@@ -40,7 +40,7 @@
                 <div class="col-md-2">
                     <a href="{{route('dashboard.categories.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
-            </div>           
+            </div>
         </form>
     </div>
 </div>

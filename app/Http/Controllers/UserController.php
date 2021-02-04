@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $users = User::where('is_deleted',false)->get();
         return view('panel.users.index')->with([
@@ -96,14 +100,13 @@ class UserController extends Controller
         if($request->password ==! null){
             $user->password = Hash::make($request->password);
         }
-        
         $user->save();
 
         return redirect()
             ->route('dashboard.users.index')
             ->withSuccess("El usuario {$user->name} con id {$user->id} fue creado con éxito");
     }
-    
+
     public function status_update(Request $request, $user){              
         $user_id = intval($user);
         $user = User::find($user_id);
@@ -111,8 +114,8 @@ class UserController extends Controller
         $user->save();
 
         return redirect()
-             ->route('dashboard.users.index')
-             ->withSuccess("El usuario {$user->first_name} fue actualizado con éxito");
+            ->route('dashboard.users.index')
+            ->withSuccess("El usuario {$user->first_name} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $user){
@@ -122,7 +125,7 @@ class UserController extends Controller
         $user->save();
 
         return redirect()
-             ->route('dashboard.users.index')
-             ->withSuccess("El usuario {$user->first_name} fue eliminado con éxito");
+            ->route('dashboard.users.index')
+            ->withSuccess("El usuario {$user->first_name} fue eliminado con éxito");
     }
 }

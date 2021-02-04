@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         return view('panel.orders.index')->with([
             'orders' => Order::all(),
@@ -36,7 +40,7 @@ class OrderController extends Controller
             'user' => $user = User::find($order->user_id),
         ]);
     }
-        
+
     public function status_update(Request $request, $order){
 
         $order = Order::find($order);
@@ -44,8 +48,8 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()
-             ->route('dashboard.orders.index')
-             ->withSuccess("La orden {$order->id} fue actualizada con éxito");
+            ->route('dashboard.orders.index')
+            ->withSuccess("La orden {$order->id} fue actualizada con éxito");
     }
 
     public function soft_delete(Request $request, $order){
@@ -54,7 +58,7 @@ class OrderController extends Controller
         $order->save();
 
         return redirect()
-             ->route('dashboard.orders.index')
-             ->withSuccess("La order {$order->id} fue eliminada con éxito");
+            ->route('dashboard.orders.index')
+            ->withSuccess("La order {$order->id} fue eliminada con éxito");
     }
 }

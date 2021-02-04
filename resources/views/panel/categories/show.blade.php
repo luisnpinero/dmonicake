@@ -9,32 +9,26 @@
 @endsection
 
 @section('content')
-
 <div class=container-fluid>
-
-    
     <div class="card mb-4">
-
         <div class="card-header">
-                Categoria: <b>{{ $category->name }}</b>
+            Categoria: <b>{{ $category->name }}</b>
         </div>
-            
         <div class="card-body">
             @csrf
             <!--Section: Block Content-->
-                    
-                <div class="col-md-8">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-borderless mb-0">
-                            <tbody>
-                                <tr>
+            <div class="col-md-8">
+                <div class="table-responsive">
+                    <table class="table table-sm table-borderless mb-0">
+                        <tbody>
+                            <tr>
                                 <th class="pl-0 w-25" scope="row"><strong>Nombre</strong></th>
                                 <td>{{ $category->name }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>               
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
         </div>
     </div>
     <div class="d-flex flex-row-reverse pb-4">

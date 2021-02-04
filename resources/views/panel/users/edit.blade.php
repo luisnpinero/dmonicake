@@ -7,20 +7,19 @@
 @section('subtitle-page','Editar usuario')
 
 @section('content')
-
 <div class="container card">
     <div class="card-body">
         <form action="{{route('dashboard.users.update', $user)}}" method="post">
             @csrf
             @method('put')
-
+            
             <div class="form-group row">
                 <label for="first_name" class="col-md-4 col-form-label text-md-right">Nombres</label>
                 <div class="col-md-6">
                     <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') ?? $user->first_name }}" required autofocus placeholder="Ingresa los Nombres del usuario">
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <label for="last_name" class="col-md-4 col-form-label text-md-right">Apellidos</label>
                 <div class="col-md-6">
@@ -40,9 +39,9 @@
                 <div class="col-md-6">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? $user->email }}" autofocus required placeholder="Ingresa el Email">
                     @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
             </div>
@@ -51,71 +50,71 @@
                 <label for="address" class="col-md-4 col-form-label text-md-right">Dirección</label>
                 <div class="col-md-6">
                     <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') ?? $address->address }}" required autofocus placeholder="Ingresa la dirección del usuario">
-                </div>    
-            </div>    
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="city" class="col-md-4 col-form-label text-md-right">Ciudad</label>
                 <div class="col-md-6">
                     <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') ?? $address->city }}" required autofocus placeholder="Ingresa la ciudad">
-                </div>    
-            </div>    
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="province" class="col-md-4 col-form-label text-md-right">Estado o Provincia</label>
                 <div class="col-md-6">
                     <input id="province" type="text" class="form-control @error('province') is-invalid @enderror" name="province" value="{{ old('province') ?? $address->province }}" required autofocus placeholder="Ingresa el Estado o Provincia">
-                </div>    
-            </div>    
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="country" class="col-md-4 col-form-label text-md-right">País</label>
                 <div class="col-md-6">
                     <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') ?? $address->country }}" required autofocus placeholder="Ingresa el País">
-                </div>    
-            </div>    
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="postal_code" class="col-md-4 col-form-label text-md-right">Código Postal</label>
                 <div class="col-md-6">
                     <input id="postal_code" type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" value="{{ old('postal_code') ?? $address->postal_code }}" readdress autofocus placeholder="Ingresa el Código Postal">
-                </div>    
-            </div>    
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
                 <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Ingresa la contraseña">
                     @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <label for="role_id" class="col-md-4 col-form-label text-md-right">Rol</label>
                 <div class="col-md-6">
                     <select name="role_id" class="custom-select" id="role_id" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
+                        <option value="" selected disabled>Escoge una opción</option>
                         @foreach ($roles as $role)
-                            <option {{ $role->id == $user->role_id ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
+                        <option {{ $role->id == $user->role_id ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
-                    </select>  
-                </div>              
+                    </select>
+                </div>
             </div>
             
             <div class="form-group row">
                 <label for="status" class="col-md-4 col-form-label text-md-right">Estado del Usuario</label>
                 <div class="col-md-6">
                     <select name="status" class="custom-select" id="status" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
+                        <option value="" selected disabled>Escoge una opción</option>
                         <option {{ $user->status == 'active' ? 'selected' : ''}} value="active">Activo</option>
                         <option {{ $user->status == 'inactive' ? 'selected' : ''}} value="inactive">No Activo</option>
-                    </select>  
-                </div>              
-            </div>    
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="button" class="col-md-4 col-form-label text-md-right"></label>
@@ -125,7 +124,7 @@
                 <div class="col-md-2">
                     <a href="{{route('dashboard.users.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
-            </div>           
+            </div>
         </form>
     </div>
 </div>

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $currencies = Currency::where('is_deleted',false)->get();
         return view('panel.currencies.index')->with([
@@ -24,8 +28,7 @@ class CurrencyController extends Controller
         ]);
     }
 
-    public function store(Request $request){        
-        
+    public function store(Request $request){
         $currency = new Currency();
         $currency->name = $request->name;
         $currency->status = $request->status;
@@ -75,8 +78,8 @@ class CurrencyController extends Controller
         $currency->save();
 
         return redirect()
-             ->route('dashboard.currencies.index')
-             ->withSuccess("La moneda {$currency->name} fue actualizado con éxito");
+            ->route('dashboard.currencies.index')
+            ->withSuccess("La moneda {$currency->name} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $currency){              
@@ -86,8 +89,8 @@ class CurrencyController extends Controller
         $currency->save();
 
         return redirect()
-             ->route('dashboard.currencies.index')
-             ->withSuccess("La moneda {$currency->name} fue actualizado con éxito");
+            ->route('dashboard.currencies.index')
+            ->withSuccess("La moneda {$currency->name} fue actualizado con éxito");
     }
 
 }

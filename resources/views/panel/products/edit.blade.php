@@ -42,7 +42,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                 <label for="currency_id" class="col-md-4 col-form-label text-md-right">Moneda</label>
                 <div class="col-md-6">
                     <select name="currency_id" class="custom-select" id="currency_id" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
+                        <option value="" selected disabled>Escoge una opción</option>
                         @foreach ($currencies as $currency)
                             <option {{ $currency->id == $costs->find($product->cost_id)->currency_id ? 'selected' : ''}} value="{{$currency->id}}">{{$currency->name}}</option>
                         @endforeach
@@ -61,7 +61,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                 <label for="category_id" class="col-md-4 col-form-label text-md-right">Categoría del Producto</label>
                 <div class="col-md-6">
                     <select name="category_id" class="custom-select" id="category_id" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
+                        <option value="" selected disabled>Escoge una opción</option>
                         @foreach ($categories as $category)
                             <option {{ $product->category_id == $category->id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
@@ -73,7 +73,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                 <label for="status" class="col-md-4 col-form-label text-md-right">Estado del Producto</label>
                 <div class="col-md-6">
                     <select name="status" class="custom-select" id="status" required autofocus>
-                        <option value="" selected>Escoge una opción</option>
+                        <option value="" selected disabled>Escoge una opción</option>
                         <option {{ $product->status == 'active' ? 'selected' : ''}} value="active">Disponible</option>
                         <option {{ $product->status == 'inactive' ? 'selected' : ''}} value="inactive">No disponible</option>
                     </select>  
@@ -86,7 +86,7 @@ Editar Producto: <b>{{ $product->name }}</b>
                     <input type="submit" class="btn btn-success btn-lg" value="Editar">
                 </div>
                 <div class="col-md-2">
-                    <a href="{{route('dashboard.users.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
+                    <a href="{{route('dashboard.products.index')}}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
             </div>           
         </form>

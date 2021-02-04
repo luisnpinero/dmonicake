@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $categories = Category::where('is_deleted',false)->get();
         return view('panel.categories.index')->with([
             'categories' => $categories,
             'roles' => Role::all(),
-            ]);
+        ]);
     }
 
     public function create(){
@@ -25,7 +29,6 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){        
-        
         $category = new Category();
         $category->name = $request->name;
         $category->status = $request->status;
@@ -48,7 +51,7 @@ class CategoryController extends Controller
 
     public function edit($category){
         $category = Category::where('id',$category)->first();
-        
+
         return view('panel.categories.edit')->with([
             'category' => $category,
             'categories' => Category::all(),
@@ -75,8 +78,8 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect()
-             ->route('dashboard.categories.index')
-             ->withSuccess("La categoria {$category->name} fue actualizado con éxito");
+            ->route('dashboard.categories.index')
+            ->withSuccess("La categoria {$category->name} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $category){              
@@ -86,7 +89,7 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect()
-             ->route('dashboard.categories.index')
-             ->withSuccess("La categoria {$category->name} fue actualizado con éxito");
+            ->route('dashboard.categories.index')
+            ->withSuccess("La categoria {$category->name} fue actualizado con éxito");
     }
 }

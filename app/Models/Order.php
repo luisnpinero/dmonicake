@@ -13,6 +13,7 @@ use App\Models\Cost;
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'total',
         'status',
@@ -33,7 +34,7 @@ class Order extends Model
     public function products(){
         return $this->morphToMany(Product::class, 'productable')->withPivot('quantity');
     }
-    
+
     // relacion necesaria para la relacion 1-n y poder hacer cambios de precios sin alterar las boletas/recibos de pago
     // public function cost(){
     //     return $this->belongsToMany(Cost::class);

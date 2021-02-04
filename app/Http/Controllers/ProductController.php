@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){        
         $products = Product::where('is_deleted',false)->get();        
         return view('panel.products.index')->with([
@@ -107,8 +111,8 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()
-             ->route('dashboard.products.index')
-             ->withSuccess("El producto {$product->nombre} fue actualizado con éxito");
+            ->route('dashboard.products.index')
+            ->withSuccess("El producto {$product->nombre} fue actualizado con éxito");
     }
 
     public function soft_delete(Request $request, $product){
@@ -118,7 +122,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()
-             ->route('dashboard.products.index')
-             ->withSuccess("El producto {$product->name} fue eliminado con éxito");
+            ->route('dashboard.products.index')
+            ->withSuccess("El producto {$product->name} fue eliminado con éxito");
     }
 }

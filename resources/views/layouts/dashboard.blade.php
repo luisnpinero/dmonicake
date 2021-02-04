@@ -15,15 +15,15 @@
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-            <!-- Styles -->
+        <!-- Styles -->
         @yield('css.store')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
         <link href="{{asset('css/app.css')}}" rel="stylesheet" />
         @yield('css')
         <link href="{{asset('css/mystyles.css')}}" rel="stylesheet" />
-
     </head>
+
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-light bg-white shadow-sm">
             <a class="navbar-brand" href="{{ route('root') }}"></a>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </form>
-
+            
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown">
@@ -52,7 +52,6 @@
             </ul>
         </nav>
         
-        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-light shadow-sm" id="sidenavAccordion">
@@ -62,11 +61,11 @@
                             <a class="nav-link" href="{{route('dashboard.show')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Dashboard
-                            </a>                            
+                            </a>
                             <a class="nav-link" href="{{route('dashboard.contact.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
                                 Contacto
-                            </a>                            
+                            </a>
                             <div class="sb-sidenav-menu-heading">Módulos</div>
                             <a class="nav-link" href="{{route('dashboard.orders.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
@@ -78,7 +77,7 @@
                             </a>
                             <a class="nav-link" href="{{route('dashboard.users.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                Usuarios 
+                                Usuarios
                             </a>
                             <a class="nav-link" href="{{route('dashboard.roles.index')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-pencil-ruler"></i></div>
@@ -97,47 +96,45 @@
                                 Categorias
                             </a>
                         </div>
-
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Usuario:</div>
-                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} 
-                        
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                         <div class="small">Rol:</div>
                         {{ $roles->find(Auth::user()->role_id)->name}}
                     </div>
                 </nav>
             </div>
-
+            
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">@yield('title-page')</h1>
                         <h5 class="mt-4">@yield('subtitle-page')</h5>
-
+                        
+                        {{-- mensajes de exito --}}
                         <div class="container-fluid">
                             @if (session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('success') }}
-                                </div>
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
                             @endif
-                
-                            @if (isset($errors) && $errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
+                        
+                        {{-- mensajes de error --}}
+                        @if (isset($errors) && $errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        
                         @yield('content')
-     
                     </div>
                 </main>
-
-
+                
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -147,11 +144,10 @@
                 </footer>
             </div>
         </div>
-
+        
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('js/scripts.js')}}"></script>
-        
         @yield('scripts')
     </body>
 </html>
