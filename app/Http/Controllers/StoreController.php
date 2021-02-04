@@ -71,18 +71,4 @@ class StoreController extends Controller
     public function destroy($user){
         //
     }
-
-    public function store_contact(Request $request){        
-        
-        $contact = new Contact();
-        $contact->name = $request->name;
-        $contact->email = $request->email;
-        $contact->phone_number = $request->phone_number;
-        $contact->message = $request->message;
-        $contact->save();
-
-        return redirect()
-            ->route('contact')
-            ->withSuccess("El formulario de contacto ha sido enviado con éxito");
-    }
 }

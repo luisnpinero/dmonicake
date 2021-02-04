@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('root');
 Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
 Route::get('/contact', 'HomeController@contact')->name('contact');
-Route::post('/contact', 'StoreController@store_contact')->name('contact.store');
+Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 //Rutas Vistas Store
 Route::get('store', 'StoreController@index')->name('store.index');

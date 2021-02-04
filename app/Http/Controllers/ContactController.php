@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ContactController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
 
     public function index(){
@@ -36,5 +36,19 @@ class ContactController extends Controller
         return redirect()
             ->route('dashboard.contact.index')
             ->withSuccess("El mensaje {$contact->id} fue actualizada con éxito");
+    }
+
+    public function store(Request $request){        
+        
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone_number = $request->phone_number;
+        $contact->message = $request->message;
+        $contact->save();
+
+        return redirect()
+            ->route('contact')
+            ->withSuccess("El formulario de contacto ha sido enviado con éxito");
     }
 }
