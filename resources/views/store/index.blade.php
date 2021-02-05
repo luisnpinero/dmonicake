@@ -3,7 +3,7 @@
 @section('title', 'Tienda')
 
 @section('css.store')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" integrity="sha512-+WF6UMXHki/uCy0vATJzyA9EmAcohIQuwpNz0qEO+5UeE5ibPejMRdFuARSrl1trs3skqie0rY/gNiolfaef5w==" crossorigin="anonymous" />0
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" integrity="sha512-+WF6UMXHki/uCy0vATJzyA9EmAcohIQuwpNz0qEO+5UeE5ibPejMRdFuARSrl1trs3skqie0rY/gNiolfaef5w==" crossorigin="anonymous" />
 @endsection
 
 @section('css')
@@ -78,7 +78,7 @@
               Agotado
                   <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-flex flex-column-reverse" method="POST">
                     @csrf
-                    <button type="button" class="btn btn-secondary disabled">Agotado</button>
+                    <button type="button" class="btn btn-secondary" disabled>Agotado</button>
                   </form>
               @else
               Stock: {{$product->stock}}              

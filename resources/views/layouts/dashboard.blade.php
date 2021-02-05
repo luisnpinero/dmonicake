@@ -6,10 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Luis Piñero">
+        <link rel="icon" type="image/png" href="https://i.postimg.cc/Gtrdvvrj/2.png">
+
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@yield('title') {{ config('app.name', 'Laravel') }}</title>
+        <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">

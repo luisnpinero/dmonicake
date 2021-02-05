@@ -113,5 +113,8 @@ Route::get('store/product/{product:name}', 'StoreController@show')->name('store.
 
 //Rutas Carrito
 Route::resource('products.carts', 'CartProductController')->only(['store','destroy']);
+
+// Route::get('store/carts')
+Route::resource('carts', 'CartController')->only(['index']);
 // Route::post('store/{product}/carts', 'CartProductController')->name('store.cart.store');
 // Route::delete('store/{product}/carts/{cart}', 'CartProductController')->name('store.cart.delete');

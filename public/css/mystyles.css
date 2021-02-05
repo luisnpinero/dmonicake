@@ -69,6 +69,11 @@
     color:#f24d9a;
 }
 
+.fas-icon-light{
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}
+
 .fas-icon-purple:hover, .fas-icon-purple:active, .fas-icon-purple:focus{
     color:#7d2181;
 }
