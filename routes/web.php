@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -110,3 +111,7 @@ Route::get('store', 'StoreController@index')->name('store.index');
 Route::get('store/{category:name}', 'StoreController@categories')->name('store.categories.show');
 Route::get('store/product/{product:name}', 'StoreController@show')->name('store.product.show');
 
+//Rutas Carrito
+Route::resource('products.carts', 'CartProductController')->only(['store','destroy']);
+// Route::post('store/{product}/carts', 'CartProductController')->name('store.cart.store');
+// Route::delete('store/{product}/carts/{cart}', 'CartProductController')->name('store.cart.delete');

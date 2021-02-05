@@ -67,18 +67,27 @@
         @foreach($products as $product)
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
-            <a href="{{ route('store.product.show', $product->name)}}"><img class="card-img-top" src="{{ asset($product->images->first()->path) }}" alt=""></a>
+            <a href="{{ route('store.product.show', $product->name)}}"><img class="card-img-top img-responsife" src="{{ asset($product->images->first()->path) }}" alt="" height="200"></a>
             <div class="card-body mb-6">
               <h4 class="card-title"><a href="{{ route('store.product.show', $product->name)}}">{{ $product->name}}</a></h4>
               <h5>{{$currencies->find(1)->name}} {{$costs->find($product->cost_id)->cost}}</h5>
               <p class="card-text text-wrap text-truncate">{{$product->description}}</p>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-inline">
               @if ($product->stock < 1)
-              AGOTADO
+              Agotado
+                  <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-flex flex-column-reverse" method="POST">
+                    @csrf
+                    <button type="button" class="btn btn-secondary disabled">Agotado</button>
+                  </form>
               @else
-              Stock: {{$product->stock}}
+              Stock: {{$product->stock}}              
+              <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-flex flex-column-reverse" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Agregar a Carrito</button>
+              </form>
               @endif
+
             </div>
           </div>
         </div>
