@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' =>$this->faker->unique()->randomElement(['Dulce','Salado','Fitness','Vegano','Vegetariano','Fusión']),
-            'status' =>$this->faker->randomElement(['Active','Inactive']),
+            // 'status' =>$this->faker->randomElement(['Active','Inactive']),
             'modified_by' =>$this->faker->randomDigitNotNull,
         ];
     }

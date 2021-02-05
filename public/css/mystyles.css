@@ -1,0 +1,83 @@
+*, body{
+    font-family: 'Lato', sans-serif;
+    
+}
+
+.navbar-brand{
+    background-image: url(https://i.postimg.cc/T2DZrQGK/dani-logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 2.5rem;
+    width: 8rem;
+}
+
+.bg-dark, .bg-white {
+    background-color: #4ad1b1 !important;
+}
+
+.bg-primary {
+    background-color: #F2DFF1 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #f24d9a;
+    border-color: #f24d9a;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #f24d9a;
+    border-color: #f24d9a;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:hover, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #7d2181;
+    border-color: #7d2181;
+}
+
+.a{
+    color: #f24d9a;
+}
+
+.a:active , .a:hover{
+    background-color: #7d2181;
+    text-decoration: none;
+}
+
+.login-logo{
+    background-image: url(https://i.postimg.cc/T2DZrQGK/dani-logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 8rem;
+    width: 8rem;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #7d2181;
+    text-decoration: none;
+}
+
+.sb-sidenav-light {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+.fas-icon-purple{
+    color:#f24d9a;
+}
+
+.fas-icon-light{
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}
+
+.fas-icon-purple:hover, .fas-icon-purple:active, .fas-icon-purple:focus{
+    color:#7d2181;
+}
+
+.fa-input { 
+    font-family: FontAwesome, ‘Helvetica Neue’, Helvetica, Arial, sans-serif;
+}

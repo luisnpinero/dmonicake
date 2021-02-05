@@ -19,6 +19,7 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('province');
             $table->string('country');
+            $table->string('postal_code');
             $table->timestamps();
         });
     }
