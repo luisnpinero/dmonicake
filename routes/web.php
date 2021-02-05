@@ -20,9 +20,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//como usar resources si tengo funciones adicionales a las standard?
+
 Route::group(['middleware' => 'admin'], function () {
     //vista dashboard
-    Route::get('dashboard/index', 'DashboardController@index')->name('dashboard.show');
+    Route::get('dashboard/index', 'DashboardController@index')->name('dashboard.index');
 
     //vista dashboard productos
     Route::get('dashboard/products', 'ProductController@index')->name('dashboard.products.index');
@@ -105,6 +107,6 @@ Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 //Rutas Vistas Store
 Route::get('store', 'StoreController@index')->name('store.index');
-Route::get('store/{category}', 'StoreController@categories')->name('store.categories.show');
-Route::get('store/product/{product}', 'StoreController@show_product')->name('store.product.show');
+Route::get('store/{category:name}', 'StoreController@categories')->name('store.categories.show');
+Route::get('store/product/{product:name}', 'StoreController@show')->name('store.product.show');
 

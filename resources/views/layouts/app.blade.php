@@ -84,7 +84,7 @@
                                         Perfil
                                     </a>
                                     @if (optional(auth()->user())->isAdmin())
-                                    <a class="dropdown-item" href="{{ route('dashboard.show')}}">
+                                    <a class="dropdown-item" href="{{ route('dashboard.index')}}">
                                         Admin Panel
                                     </a>
                                     @endif

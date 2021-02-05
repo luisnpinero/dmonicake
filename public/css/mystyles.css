@@ -31,6 +31,15 @@
     border-color: #7d2181;
 }
 
+.a{
+    color: #f24d9a;
+}
+
+.a:active , .a:hover{
+    background-color: #7d2181;
+    text-decoration: none;
+}
+
 .login-logo{
     background-image: url(https://i.postimg.cc/T2DZrQGK/dani-logo.png);
     background-size: contain;

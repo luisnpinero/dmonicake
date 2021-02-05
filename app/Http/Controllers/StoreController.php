@@ -7,16 +7,14 @@ use App\Models\Contact;
 use App\Models\Cost;
 use App\Models\Currency;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
     public function index(){
-        $categories = Category::where('is_deleted',false)
-            ->orWhere('status','inactive')
-            ->get();
-        $products = Product::where('is_deleted',false);
-        $products = $products->paginate(12);
+        $categories = Category::where('status','active')->get();
+        $products = Product::where('status','active')->paginate(9);
         $costs = Cost::all();
         $currencies = Currency::all();
 
@@ -33,8 +31,7 @@ class StoreController extends Controller
         // return view('index');
     }
 
-    public function show_product($product){
-        $product = Product::where('name',$product)->first();
+    public function show(Product $product){
         $cost = Cost::find($product->cost_id)->first();
         $currency = Currency::find($cost->currency_id)->first();
         return view('store.show')->with([
@@ -44,9 +41,8 @@ class StoreController extends Controller
         ]);
     }
 
-    public function categories($category){
-        $category = Category::where('name', $category)->first();
-        $products = Product::where('category_id',$category->id)->get();
+    public function categories(Category $category){
+        $products = Product::where('category_id',$category->id)->paginate(9);
         $costs = Cost::all();
         $currencies = Currency::all();
 
@@ -58,7 +54,7 @@ class StoreController extends Controller
         ]);
     }
 
-    public function edit($user){
+    public function edit(User $user){
         return "vista dashboard user edit {$user}";
         // return view('index');
     }

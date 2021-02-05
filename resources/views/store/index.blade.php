@@ -3,7 +3,10 @@
 @section('title', 'Tienda')
 
 @section('css.store')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" integrity="sha512-+WF6UMXHki/uCy0vATJzyA9EmAcohIQuwpNz0qEO+5UeE5ibPejMRdFuARSrl1trs3skqie0rY/gNiolfaef5w==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" integrity="sha512-+WF6UMXHki/uCy0vATJzyA9EmAcohIQuwpNz0qEO+5UeE5ibPejMRdFuARSrl1trs3skqie0rY/gNiolfaef5w==" crossorigin="anonymous" />0
+@endsection
+
+@section('css')
 @endsection
 
 @section('content')
@@ -64,7 +67,7 @@
         @foreach($products as $product)
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100">
-            <a href="{{ route('store.product.show', $product->name)}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="{{ route('store.product.show', $product->name)}}"><img class="card-img-top" src="{{ asset($product->images->first()->path) }}" alt=""></a>
             <div class="card-body mb-6">
               <h4 class="card-title"><a href="{{ route('store.product.show', $product->name)}}">{{ $product->name}}</a></h4>
               <h5>{{$currencies->find(1)->name}} {{$costs->find($product->cost_id)->cost}}</h5>
