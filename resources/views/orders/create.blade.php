@@ -52,12 +52,25 @@
                         @else
                         <div class="card col-12 my-2">
                             <div class="table-responsive">
+                                <form action="{{ route('store.orders.store') }}" method="POST">
                                 <div class="col-lg-12 colx-xs-2 py-4">
                                     <h3>Total Compra:</h3>
                                     <h2 class="text-right"><strong>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name }} {{$cart->total}}</strong></h2>
                                 </div>
                                 <div class="col-lg-12 colx-xs-2 py-4 text-right">
-                                    <a href="{{ route('store.orders.create') }}" class="btn btn-primary ">Ir a Pagar</a>
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="name" class="">Metodo de pago</label>
+                                            <select name="payment_method_id" class="custom-select" id="payment_method_id" required autofocus>
+                                                <option value="" selected disabled>Escoge una opción</option>
+                                                @foreach ($paymentmethods as $paymentmethod)
+                                                <option {{ old('payment_method_id') == '$paymentmethod->id' ? 'selected' : ''}} value="{{$paymentmethod->id}}">{{$paymentmethod->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="number" hidden name="total" value="{{$cart->total}}">
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Finalizar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

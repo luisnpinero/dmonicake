@@ -116,6 +116,7 @@ Route::resource('products.carts', 'CartProductController')->only(['store','destr
 
 //Rutas Orden
 Route::get('order/create', 'OrderController@create')->name('store.orders.create');
+Route::get('order/finish', 'OrderController@finish')->name('store.orders.finish');
 Route::post('order/create', 'OrderController@store')->name('store.orders.store');
 //Route::resource('order', 'OrderController')->only(['create','store']);
 
