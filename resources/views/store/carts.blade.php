@@ -9,9 +9,9 @@
         <div class="card-body">
             <h4>Tus Productos</h4>
             <div class="row">
-                <div class="col-lg-8 col-xs-12">
+                <div class="col-lg-7 col-xs-12 mr-4">
                     <div class="row">
-                        @if (!isset($cart) || $cart->products->isEmpty())
+                        @if(!isset($cart) || $cart->products->isEmpty())
                         <div class="alert alert-warning">Tu carrito está vacio.</div>
                         @else
                         @foreach ($cart->products as $product)
@@ -36,11 +36,17 @@
                                                     <th class="pl-0 w-25" scope="row"><strong>Candidad</strong></th>
                                                     <td>{{ $product->pivot->quantity }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <th class="pl-0 w-25" scope="row"><strong>Subtotal</strong></th>
+                                                    <td>{{ $product->total }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <form action="">
-                                        <button class="btn btn-danger">Eliminar</button>
+                                    <form method="POST" class="" action="{{ route('products.carts.destroy', ['cart'=> $cart->id, 'product' => $product->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </form>
                                 </div>
                             </div>
@@ -49,9 +55,23 @@
                         @endempty
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-md-12 col-xs-12">
-                    <div class="card-body">
-                        Aqui va el total y el iniciar orden
+                <div class="col-lg-4 col-xs-12">
+                    <div class="row">
+                        @if(!isset($cart) || $cart->products->isEmpty())
+                        <div class="alert alert-warning">Tu carrito está vacio.</div>
+                        @else
+                        <div class="card col-12 my-2">
+                            <div class="table-responsive">
+                                <div class="col-lg-12 colx-xs-2 py-4">
+                                    <h3>Total Compra:</h3>
+                                    <h2 class="text-right"><strong>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name }} {{$cart->total}}</strong></h2>
+                                </div>
+                                <div class="col-lg-12 colx-xs-2 py-4 text-right">
+                                    <a href="{{ route('store.orders.create') }}" class="btn btn-primary ">Realizar Compra</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endempty
                     </div>
                 </div>
             </div>

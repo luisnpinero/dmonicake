@@ -9,13 +9,17 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function __construct(){
+    public $cartService;
+
+    public function __construct(CartService $cartService){
         $this->middleware('auth');
+        $this->cartService = $cartService;
     }
 
     public function index(){
@@ -36,6 +40,22 @@ class OrderController extends Controller
             'currencies' => Currency::all(),
             'costs' => Cost::all(),
             'user' => User::find($order->user_id),
+        ]);
+    }
+
+    public function create(){
+        $cart = $this->cartService->getFromCookie();
+
+        if (!isset($cart) || $cart->products->isEmpty()) {
+            return redirect()
+                ->back()
+                ->withErrors("Your cart is empty!");
+        }
+
+        return view('orders.create')->with([
+            'cart' => $cart,
+            'currencies' => Currency::all(),
+            'costs' => Cost::all(),
         ]);
     }
 
