@@ -6,16 +6,22 @@ use App\Models\Category;
 use App\Models\Cost;
 use App\Models\Currency;
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
-    public function __construct(){
+    public $cartService;
+
+    public function __construct(CartService $cartService){
         $this->middleware('auth');
+        $this->cartService = $cartService;
     }
 
     public function index(){
@@ -37,6 +43,51 @@ class OrderController extends Controller
             'costs' => Cost::all(),
             'user' => User::find($order->user_id),
         ]);
+    }
+
+    public function create(){
+        $cart = $this->cartService->getFromCookie();
+
+        if (!isset($cart) || $cart->products->isEmpty()) {
+            return redirect()
+                ->back()
+                ->withErrors("Your cart is empty!");
+        }
+
+        return view('orders.create')->with([
+            'cart' => $cart,
+            'currencies' => Currency::all(),
+            'paymentmethods' => PaymentMethod::where('status','active')->get(),
+            'costs' => Cost::all(),
+        ]);
+    }
+
+    public function finish(){
+        return view('orders.finish');
+    }
+
+    public function store(Request $request){
+        $user = $request->user();
+        $cart = $this->cartService->getFromCookie();
+        
+        $order = New Order();
+        $order->user_id = $user->id;
+        $order->status = 'active';
+        $order->payment_method_id = $request->payment_method_id;
+        $order->total = $request->total;
+        $order->save();
+        
+        $cartProductsWithQuantity = $cart->products->mapWithKeys(function($product){
+            $quantity = $product->pivot->quantity;
+            $element[$product->id] = ['quantity' => $quantity];
+            return $element;
+            
+            // $product->decrement('stock', $quantity);
+        });
+
+        $order->products()->attach($cartProductsWithQuantity->toArray());
+
+        return "simon manaure miralo aqui";
     }
 
     public function status_update(Request $request, Order $order){

@@ -42,7 +42,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a title="Carrito" class="nav-link" href="{{ route('carts.index') }}">Carrito <i class="fas fa-shopping-cart fas-icon-light"></i></a>
+                            <a title="Carrito" class="nav-link" href="{{ route('carts.index') }}">
+                                @inject('cartService', 'App\Services\CartService')
+                                <i class="fas fa-shopping-cart fas-icon-light"></i>({{ $cartService->countProducts() }}) Carrito
+                            </a>
                         </li>
                     </ul>
 
