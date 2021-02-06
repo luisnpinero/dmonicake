@@ -23,7 +23,7 @@ class OrderFactory extends Factory
     {
         return [
             'total' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 10, $max = 999),
-            'status' => $this->faker->randomElement(['active','inactive']),
+            'status' => $this->faker->randomElement(['pending','payed']),
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -11,13 +11,36 @@
     <div class="col-lg-3">
       <h1 class="my-4">{{$product->name}}</h1>
       <div class="list-group">
-        <a href="#" class="list-group-item">Comprar</a>
+              <form action="{{ route('products.carts.store', ['product' => $product->id]) }}" class="d-flex flex-column-reverse" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Agregar a Carrito</button>
+              </form>
       </div>
     </div>
     <!-- /.col-lg-3 -->
     <div class="col-lg-9">
+      @if (session()->has('success'))
+      <div class="alert alert-success">
+        {{ session()->get('success') }}
+      </div>
+      @endif
+
       <div class="card mt-4">
-        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+        <div id="carousel-show" class="carousel slide carousel-slide">
+          <div class="carousel-inner">
+            @foreach ($product->images as $image)
+                <div class="carousel-item {{ $loop->first ? 'active': ''}}">
+                  <img class="d-block w-100 card-img-top" src="{{asset($image->path)}}" alt="">
+                </div>
+            @endforeach
+            <a class="carousel-control-prev" href="#carousel-show" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-show" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
         <div class="card-body">
           <h3 class="card-title">{{$product->name}}</h3>
           <h4>{{$currency->find(1)->name}} {{$cost->find($product->cost_id)->cost}}</h4>

@@ -53,12 +53,12 @@
                                     @csrf
                                     @method('put')
                                     
-                                    @if( $order->status == 'active' )
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="inactive">
+                                    @if( $order->status == 'payed' )
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="pending">
                                         <i class="fas fa-toggle-on text-success"></i>
                                     </button>
                                     @else
-                                    <button class="btn btn-sm px-0 mx-0" name="status" value="active">
+                                    <button class="btn btn-sm px-0 mx-0" name="status" value="payed">
                                         <i class="fas fa-toggle-off text-danger"></i>
                                     </button>
                                     @endif
