@@ -29,8 +29,27 @@
       @endif
     </div>
     <!-- /.col-lg-3 -->
+
+    
     
     <div class="col-lg-9 mt-5">
+      <div class="container-fluid">
+        @if (session()->has('success'))
+        <div class="alert alert-success mt-4">
+          {{ session()->get('success') }}
+        </div>
+        @endif
+        @if (isset($errors) && $errors->any())
+        <div class="alert alert-danger mt-4">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+      </div>
+
       {{-- <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

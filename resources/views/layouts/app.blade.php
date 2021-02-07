@@ -114,7 +114,7 @@
         </nav>
             
         <main class="pb-4">
-            <div class="container-fluid">
+            {{-- <div class="container-fluid">
                 @if (session()->has('success'))
                 <div class="alert alert-success mt-4">
                     {{ session()->get('success') }}
@@ -130,7 +130,7 @@
                     </ul>
                 </div>
                 @endif
-            </div>
+            </div> --}}
             
             @yield('content')
         </main>

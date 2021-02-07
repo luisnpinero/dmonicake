@@ -43,7 +43,7 @@ class ContactController extends Controller
         $contact->email = $request->email;
         $contact->phone_number = $request->phone_number;
         $contact->message = $request->message;
-        $contact->attended_by = Auth::user()->id;
+        $contact->attended_by = '0';
         $contact->save();
 
         return redirect()

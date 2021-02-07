@@ -42,7 +42,8 @@ class StoreController extends Controller
     }
 
     public function categories(Category $category){
-        $products = Product::where('category_id',$category->id)->paginate(9);
+        $products = Product::where('category_id',$category->id)->with('Images');
+        $products = $products->where('status','active')->paginate(9);
         $costs = Cost::all();
         $currencies = Currency::all();
 

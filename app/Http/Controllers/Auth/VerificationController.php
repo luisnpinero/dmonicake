@@ -43,6 +43,6 @@ class VerificationController extends Controller
     
     protected function verified(Request $request){
         return redirect($this->redirectPath())
-            ->with('success', 'Tu cuenta ha sido verificada, ¡gracias!');
+            ->with('success', 'Tu cuenta ha sido verificada, ¡Gracias!');
     }
 }
