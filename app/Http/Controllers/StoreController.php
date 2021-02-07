@@ -14,7 +14,7 @@ class StoreController extends Controller
 {
     public function index(){
         $categories = Category::where('status','active')->get();
-        $products = Product::where('status','active')->paginate(9);
+        $products = Product::where('status','active')->with('Images')->paginate(9);
         $costs = Cost::all();
         $currencies = Currency::all();
 
@@ -42,7 +42,8 @@ class StoreController extends Controller
     }
 
     public function categories(Category $category){
-        $products = Product::where('category_id',$category->id)->paginate(9);
+        $products = Product::where('category_id',$category->id)->with('Images');
+        $products = $products->where('status','active')->paginate(9);
         $costs = Cost::all();
         $currencies = Currency::all();
 

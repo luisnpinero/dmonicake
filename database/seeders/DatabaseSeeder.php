@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
 
         $carts = Cart::factory(50)->create();
 
-        $orders = Order::factory(25)
+        $orders = Order::factory(5)
             ->make()
             ->each(function ($order) use ($users,$paymentmethods) {
                 $order->user_id = $users->random()->id;

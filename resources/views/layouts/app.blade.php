@@ -114,6 +114,24 @@
         </nav>
             
         <main class="pb-4">
+            {{-- <div class="container-fluid">
+                @if (session()->has('success'))
+                <div class="alert alert-success mt-4">
+                    {{ session()->get('success') }}
+                </div>
+                @endif
+                
+                @if (isset($errors) && $errors->any())
+                <div class="alert alert-danger mt-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </div> --}}
+            
             @yield('content')
         </main>
 

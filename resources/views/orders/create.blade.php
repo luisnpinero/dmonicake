@@ -48,7 +48,6 @@
                 <div class="col-lg-3 col-xs-12">
                     <div class="row">
                         @if(!isset($cart) || $cart->products->isEmpty())
-                        <div class="alert alert-warning">Tu carrito está vacio.</div>
                         @else
                         <div class="card col-12 my-2">
                             <div class="table-responsive">

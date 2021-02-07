@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Validation\ValidationException;
 
 class CartProductController extends Controller
 {
@@ -32,6 +33,12 @@ class CartProductController extends Controller
             ->pivot
             ->quantity ?? 0;
 
+        if ($product->stock < $quantity+1) {
+            throw ValidationException::withMessages([
+                'product' => "No hay suficiente stock del siguiente producto: {$product->name}",
+                ]);
+            }
+
         $cart->products()->syncWithoutDetaching([
             $product->id => ['quantity' => $quantity + 1],
         ]);
@@ -39,7 +46,8 @@ class CartProductController extends Controller
         // cookie dura 1000 min
         $cookie = Cookie::make('cart', $cart->id, 1000);
 
-        return redirect()->back()->cookie($cookie);
+        return redirect()->back()->cookie($cookie)
+            ->withSuccess("El producto {$product->name} ha sido añadido con exito al carrito");
     }
 
     /**

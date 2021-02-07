@@ -72,22 +72,33 @@ class OrderController extends Controller
         
         $order = New Order();
         $order->user_id = $user->id;
-        $order->status = 'active';
+        $order->status = 'pending';
         $order->payment_method_id = $request->payment_method_id;
         $order->total = $request->total;
         $order->save();
         
         $cartProductsWithQuantity = $cart->products->mapWithKeys(function($product){
             $quantity = $product->pivot->quantity;
-            $element[$product->id] = ['quantity' => $quantity];
-            return $element;
             
-            // $product->decrement('stock', $quantity);
+            if ($product->stock < $quantity) {
+                throw ValidationException::withMessages([
+                    'product' => "No hay suficiente stock del siguiente producto: {$product->name}",
+                    ]);
+                }
+                
+            $product->stock = $product->stock - $quantity;
+            $product->save();
+            
+            $element[$product->id] = ['quantity' => $quantity];
+
+            return $element;
         });
 
         $order->products()->attach($cartProductsWithQuantity->toArray());
 
-        return "simon manaure miralo aqui";
+
+        return redirect()->route('store.orders.finish')
+            ->withSuccess("Su orden ha sido creada exitosamente bajo el numero de orden {$order->id}");
     }
 
     public function status_update(Request $request, Order $order){

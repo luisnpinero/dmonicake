@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true,
+]);
 
 //como usar resources si tengo funciones adicionales a las standard?
 
