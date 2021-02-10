@@ -9,7 +9,7 @@
 @section('content')
 <div class="container card">
     <div class="card-body">
-        <form action="{{route('dashboard.users.update', $user)}}" method="post">
+        <form action="{{route('dashboard.users.update', $user)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
             
@@ -113,6 +113,20 @@
                         <option {{ $user->status == 'active' ? 'selected' : ''}} value="active">Activo</option>
                         <option {{ $user->status == 'inactive' ? 'selected' : ''}} value="inactive">No Activo</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">
+                    {{ __('Imagen') }}
+                </label>
+                <div class="col-md-6">
+                    <div class="custom-file">
+                        <input type="file" accept="image/*" name="image" class="custom-file-input">
+                        <label class="custom-file-label">
+                            Cargar Imagen de Perfil
+                        </label>
+                    </div>
                 </div>
             </div>
 

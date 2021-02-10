@@ -125,6 +125,11 @@ Route::post('order/create', 'OrderController@store')->name('store.orders.store')
 // Route::get('store/carts')
 Route::resource('carts', 'CartController')->only(['index']);
 
+//rutas perfil
+Route::get('profile', 'ProfileController@index')->name('profile.index');
+Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+Route::put('profile', 'ProfileController@update')->name('profile.update');
+
 
 // Route::post('store/{product}/carts', 'CartProductController')->name('store.cart.store');
 // Route::delete('store/{product}/carts/{cart}', 'CartProductController')->name('store.cart.delete');

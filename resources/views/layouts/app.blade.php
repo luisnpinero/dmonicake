@@ -89,7 +89,7 @@
                                 </a>
                                 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('profile.index')}}">
                                         Perfil
                                     </a>
                                     @if (optional(auth()->user())->isAdmin())
