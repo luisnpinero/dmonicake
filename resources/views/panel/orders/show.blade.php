@@ -61,9 +61,8 @@ Vista de orden
         </div>
 
         <div class="card-footer">
-            Orden: <b>{{ $order->id }}</b>
+            Productos
         </div>
-
         <div class="card-body">
             <table class="table table-bordered table-striped" id="dataTable" width="99%" cellspacing="0">
                 <thead>
@@ -71,9 +70,9 @@ Vista de orden
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Categoría</th>
-                        <th>Stock</th>
+                        <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>Estado</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -81,20 +80,20 @@ Vista de orden
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Categoría</th>
-                        <th>Stock</th>
+                        <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>Estado</th>
+                        <th>Total</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($order->products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $categories->find($product->category_id)->name }}</td>
-                            <td>{{ $product->stock }}</td>
+                            <td>{{ $product->pivot->quantity }}</td>
                             <td>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name}} {{ $costs->find($product->cost_id)->cost}}</td>
-                            <td>{{ $product->status}}</td>
+                            <td>{{ $currencies->find($costs->find($product->cost_id)->currency_id)->name }} {{$product->total}}</td>
                         </tr>
                     @endforeach
                 </tbody>

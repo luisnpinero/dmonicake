@@ -17,12 +17,21 @@
         
         <div class="card-body">
             @csrf
-            <!--Section: Block Content-->
             {{-- fotos del producto --}}
             <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="mdb-lightbox">
-                        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+                <div id="carousel-show" class="carousel slide carousel-slide col-md-4">
+                    <div class="carousel-inner">
+                        @foreach ($product->images as $image)
+                        <div class="carousel-item {{ $loop->first ? 'active': ''}}">
+                            <img class="d-block w-100 card-img-top" src="{{asset($image->path)}}" alt="">
+                        </div>
+                        @endforeach
+                        <a class="carousel-control-prev" href="#carousel-show" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-show" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
                     </div>
                 </div>
                 
