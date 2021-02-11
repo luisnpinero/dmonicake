@@ -7,8 +7,10 @@ use App\Models\Cost;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Role;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -50,6 +52,10 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->modified_by = Auth::user()->id;
         $product->save();
+
+        $product->image()->create([
+                'path' => $request->image->store('products','images'),
+            ]);
 
         return redirect()
             ->route('dashboard.products.index')
@@ -93,6 +99,17 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->modified_by = Auth::user()->id;
         $product->save();
+
+        if ($request->hasFile('image')) {
+            if ($product->image != null) {
+                Storage::disk('images')->delete($product->image->path);
+                $product->image->delete();
+            }
+
+            $product->images()->create([
+                'path' => $request->image->store('products', 'images'),
+            ]);
+        }
 
         return redirect()
             ->route('dashboard.products.index')

@@ -63,4 +63,11 @@ class Product extends Model
         $cost = Cost::find($this->cost_id);
         return $this->pivot->quantity * $cost->cost;
     }
+    
+    public function getProductImageAttribute()
+    {
+        return $this->image
+            ? "images/{$this->image->path}"
+            : 'https://www.gravatar.com/avatar/404?d=mp';
+    }
 }

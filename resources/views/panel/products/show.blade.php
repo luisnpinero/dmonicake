@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="d-flex flex-row-reverse pb-4">
-        <a href="{{route('dashboard.products.edit',$product->name)}}" class="btn btn-primary">Editar <i class="fas fa-edit"></i></a>
+        <a href="{{route('dashboard.products.edit',$product)}}" class="btn btn-primary">Editar <i class="fas fa-edit"></i></a>
     </div>
 </div>
 @endsection

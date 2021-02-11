@@ -31,6 +31,7 @@
                     <div class="card mb-4">
                         <div class="card body">
                             <img class="card-img-top img-fluid" src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}">
+                            @dump(Auth::user()->profile_image)
                         </div>
                         <div class="card-footer">
                             <strong>Foto de Perfil</strong>

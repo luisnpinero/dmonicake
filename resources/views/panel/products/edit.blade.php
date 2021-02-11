@@ -13,7 +13,7 @@ Editar Producto: <b>{{ $product->name }}</b>
 <div class="container card">
     <div class="card-body">
         
-        <form action="{{ route('dashboard.products.update', $product) }}" method="post">
+        <form action="{{ route('dashboard.products.update', $product) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
 
@@ -77,8 +77,23 @@ Editar Producto: <b>{{ $product->name }}</b>
                         <option {{ $product->status == 'active' ? 'selected' : ''}} value="active">Disponible</option>
                         <option {{ $product->status == 'inactive' ? 'selected' : ''}} value="inactive">No disponible</option>
                     </select>  
-                </div>              
-            </div>    
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right">
+                    {{ __('Image') }}
+                </label>
+
+                <div class="col-md-6">
+                    <div class="custom-file">
+                        <input type="file" accept="image/*" name="image" class="custom-file-input">
+                        <label class="custom-file-label">
+                            Profile image...
+                        </label>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="button" class="col-md-4 col-form-label text-md-right"></label>
